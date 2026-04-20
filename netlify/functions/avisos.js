@@ -12,9 +12,13 @@ const PROGRAMAS_BASE = [
   { nombre: 'Actualizando la Tarde',  inicio: '17:00', fin: '19:00', dias: 'Lunes a Viernes' },
 ];
 
-async function getStore() {
+async function getStore(nombre = 'avisos') {
   const { getStore } = require('@netlify/blobs');
-  return getStore('avisos');
+  return getStore({
+    name: nombre,
+    siteID: process.env.NETLIFY_SITE_ID,
+    token: process.env.NETLIFY_BLOBS_TOKEN
+  });
 }
 async function getAvisos() {
   try { const s = await getStore(); const r = await s.get('lista',{type:'text'}); return r ? JSON.parse(r) : []; } catch(e) { return []; }
