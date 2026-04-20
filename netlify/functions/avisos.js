@@ -14,11 +14,7 @@ const PROGRAMAS_BASE = [
 
 async function getStore(nombre = 'avisos') {
   const { getStore } = require('@netlify/blobs');
-  return getStore({
-    name: nombre,
-    siteID: process.env.NETLIFY_SITE_ID,
-    token: process.env.NETLIFY_BLOBS_TOKEN
-  });
+  return getStore(nombre);
 }
 async function getAvisos() {
   try { const s = await getStore(); const r = await s.get('lista',{type:'text'}); return r ? JSON.parse(r) : []; } catch(e) { return []; }
@@ -35,6 +31,10 @@ async function setEstado(chatId, estado) { const s = await getStore(); await s.s
 async function limpiarEstado(chatId) { try { const s = await getStore(); await s.delete(`est_${chatId}`); } catch(e) {} }
 
 exports.handler = async (event) => {
+  // Conectar Netlify Blobs en modo Lambda (REQUERIDO para que funcione get/set)
+  const { connectLambda } = require('@netlify/blobs');
+  connectLambda(event);
+
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: CORS };
 
   if (event.httpMethod === 'GET') {
@@ -165,13 +165,9 @@ async function manejarTelegram(update) {
 
   // LIMPIAR
   if (texto === 'limpiar_todo') {
-    await tgButtons(TOKEN, chatId, '⚠️ ¿Eliminar *todos* los avisos?',
-      [[{ text: '✅ Sí, limpiar', callback_data: 'ok_limpiar' }],
-       [{ text: '❌ Cancelar', callback_data: 'ver_lista' }]], 'Markdown');
-    return { statusCode: 200, body: 'ok' };
-  }
-  if (texto === 'ok_limpiar') {
-    const n = avisos.length; await setAvisos([]);
+    const n = avisos.length;
+    avisos = [];
+    await setAvisos(avisos);
     await tgButtons(TOKEN, chatId, `🧹 Se eliminaron ${n} aviso(s).`, [[{ text: '🏠 Menú', callback_data: 'menu' }]]);
     return { statusCode: 200, body: 'ok' };
   }
