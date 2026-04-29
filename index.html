@@ -4,19 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Radio Mila FM 88.7 — Panel Estudio</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0a;
-    --surface: #141414;
-    --surface2: #1e1e1e;
-    --border: #2a2a2a;
-    --text: #f0f0f0;
-    --muted: #666;
-    --amber: #ffab00;
-    --red: #e8002d;
-    --green: #00c853;
-    --pink: #e91e8c;
-    --blue: #2979ff;
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --surface2: #fafaf8;
+    --border: #e8e6e0;
+    --text: #1a1a1a;
+    --muted: #888;
+    --muted2: #bbb;
+    --pink:   #e91e8c;
+    --orange: #ff6d00;
+    --yellow: #c8b800;
+    --green:  #6abf00;
+    --sky:    #29b6e8;
+    --red:    #e8002d;
+    --amber:  #ff8f00;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,240 +28,354 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Nunito Sans', sans-serif;
     display: flex;
     flex-direction: column;
     height: 100vh;
   }
 
-  /* ── TOPBAR ── */
+  /* TOPBAR */
   .topbar {
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    height: 56px;
+    display: flex; align-items: center;
+    padding: 0 20px; height: 58px;
     background: var(--surface);
-    border-bottom: 3px solid transparent; border-image: linear-gradient(90deg, #e91e8c, #ff6d00, #ffd600, #00c853, #00b0ff) 1;
-    flex-shrink: 0;
-    gap: 14px;
+    border-bottom: 4px solid transparent;
+    border-image: linear-gradient(90deg, #e91e8c, #ff6d00, #c8b800, #6abf00, #29b6e8) 1;
+    flex-shrink: 0; gap: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
-  .logo { height: 36px; border-radius: 6px; }
-  .station { font-size: 18px; font-weight: 800; letter-spacing: 2px; color: var(--text); }
-  .station span { color: var(--red); }
+  .logo-svg { height: 40px; width: 40px; flex-shrink: 0; }
+  .station { font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 900; color: var(--text); line-height: 1.2; }
+  .station .fm { font-size: 11px; color: var(--muted); font-weight: 600; display: block; }
   .on-air {
     display: flex; align-items: center; gap: 6px;
-    background: linear-gradient(135deg, #e91e8c, #ff6d00); color: #fff;
-    font-size: 11px; font-weight: 800; letter-spacing: 2px;
-    padding: 4px 12px; border-radius: 4px;
+    background: linear-gradient(135deg, var(--pink), var(--orange));
+    color: #fff; font-family: 'Nunito', sans-serif;
+    font-size: 10px; font-weight: 900; letter-spacing: 2px;
+    padding: 5px 12px; border-radius: 20px;
   }
-  .dot { width: 7px; height: 7px; background: #fff; border-radius: 50%; animation: blink 1s infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
+  .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; animation: blink 1s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
   .clock {
-    margin-left: auto;
-    font-size: 22px;
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
-    color: #ff6d00;
-    letter-spacing: 2px;
+    margin-left: auto; font-family: 'Nunito', sans-serif;
+    font-size: 26px; font-weight: 900; font-variant-numeric: tabular-nums;
+    color: var(--orange); letter-spacing: 2px;
   }
-  .fecha {
-    font-size: 11px;
-    color: var(--muted);
-    margin-left: 4px;
-    text-align: right;
-    line-height: 1.3;
-  }
+  .fecha { font-size: 10px; color: var(--muted); text-align: right; line-height: 1.4; font-weight: 600; }
 
-  /* ── PROGRAMA ACTUAL ── */
+  /* PROGRAMA BAR */
   .programa-bar {
-    background: var(--surface2);
-    border-bottom: 1px solid var(--border);
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
+    background: var(--surface2); border-bottom: 1px solid var(--border);
+    padding: 8px 20px; display: flex; align-items: center; gap: 12px; flex-shrink: 0;
   }
-  .programa-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-  .programa-nombre {
-    font-size: 14px; font-weight: 700; color: #ff6d00;
+  .prog-pill {
+    display: flex; align-items: center; gap: 8px;
+    background: #fff5f0; border: 1.5px solid #ffd0b0;
+    border-radius: 20px; padding: 4px 14px 4px 8px;
   }
-  .programa-horario { font-size: 12px; color: var(--muted); }
-  .avisos-pendientes {
-    margin-left: auto;
-    display: flex; align-items: center; gap: 6px;
-    font-size: 12px; color: var(--muted);
-  }
+  .prog-dot { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--pink), var(--orange)); flex-shrink: 0; }
+  .prog-label { font-size: 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .prog-nombre { font-size: 14px; font-weight: 900; color: var(--orange); font-family: 'Nunito', sans-serif; }
+  .prog-horario { font-size: 11px; color: var(--muted); font-weight: 600; }
+  .avisos-pendientes { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); font-weight: 600; }
   .badge-count {
-    background: var(--amber); color: #000;
-    font-size: 12px; font-weight: 800;
-    padding: 2px 8px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--sky), #1a8fbf); color: #fff;
+    font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 900;
+    padding: 2px 10px; border-radius: 12px; min-width: 28px; text-align: center;
   }
-  .badge-count.urgente { background: var(--red); color: #fff; }
+  .badge-count.urgente { background: linear-gradient(135deg, var(--red), #b00020); }
 
-  /* ── LISTA DE AVISOS ── */
-  .lista {
+  /* COLUMNAS */
+  .columnas { flex: 1; display: flex; overflow: hidden; }
+
+  .columna-programa {
+    flex: 3;
+    display: flex; flex-direction: column; overflow: hidden;
+    border-right: 2px solid var(--border);
+  }
+  .columna-radio {
     flex: 1;
-    overflow-y: auto;
-    padding: 16px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: flex; flex-direction: column; overflow: hidden;
+    background: var(--surface2);
   }
 
+  .col-header {
+    padding: 10px 16px 8px; background: var(--surface);
+    border-bottom: 3px solid var(--border);
+    flex-shrink: 0; display: flex; align-items: center; gap: 8px;
+  }
+  .col-header.programa { border-bottom-color: var(--orange); }
+  .col-header.radio    { border-bottom-color: var(--sky); }
+  .col-titulo { font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+  .col-header.programa .col-titulo { color: var(--orange); }
+  .col-header.radio    .col-titulo { color: var(--sky); }
+  .col-badge { font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 900; padding: 1px 7px; border-radius: 10px; color: #fff; }
+  .col-header.programa .col-badge { background: var(--orange); }
+  .col-header.radio    .col-badge { background: var(--sky); }
+
+  /* LISTA PROGRAMA */
+  .lista-programa {
+    flex: 1; overflow-y: auto; padding: 12px 16px;
+    display: flex; flex-direction: column; gap: 10px; background: var(--bg);
+  }
+  .lista-programa::-webkit-scrollbar { width: 4px; }
+  .lista-programa::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  /* LISTA RADIO (compacta) */
+  .lista-radio {
+    flex: 1; overflow-y: auto; padding: 8px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .lista-radio::-webkit-scrollbar { width: 3px; }
+  .lista-radio::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* CARDS PROGRAMA (grandes) */
   .aviso-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.2s;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 14px; padding: 16px 18px;
+    display: flex; gap: 12px; align-items: flex-start;
+    position: relative; overflow: hidden;
+    transition: box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
   }
-
-  /* Barra lateral izquierda según estado */
   .aviso-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 4px;
-    background: var(--border);
-    border-radius: 10px 0 0 10px;
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 5px; background: var(--border); border-radius: 14px 0 0 14px;
   }
-  .aviso-card.urgente::before { background: var(--red); }
-  .aviso-card.ahora::before  { background: var(--green); }
-  .aviso-card.proximo::before { background: var(--amber); }
+  .aviso-card.urgente::before { background: linear-gradient(180deg, var(--red), #ff6b6b); }
+  .aviso-card.ahora::before   { background: linear-gradient(180deg, var(--green), #a8e063); }
+  .aviso-card.alerta::before  { background: linear-gradient(180deg, var(--amber), var(--yellow)); }
 
-  /* Flash para urgente */
-  .aviso-card.urgente {
-    border-color: var(--red);
-    animation: flashBorder 2s infinite;
-  }
-  @keyframes flashBorder {
-    0%,100% { box-shadow: 0 0 0 0 rgba(232,0,45,0); }
-    50%      { box-shadow: 0 0 0 4px rgba(232,0,45,0.25); }
-  }
+  .aviso-card.urgente { border-color: #ffcdd2; background: #fff8f8; animation: flashUrgente 2s infinite; }
+  @keyframes flashUrgente { 0%,100%{box-shadow:0 1px 4px rgba(0,0,0,0.04)} 50%{box-shadow:0 0 0 4px rgba(232,0,45,0.18)} }
+  .aviso-card.ahora { border-color: #c8f0a0; background: #f4fff0; }
+  .aviso-card.alerta { border-color: #ffd090; background: #fffaf0; animation: flashAlerta 1.2s infinite; }
+  @keyframes flashAlerta { 0%,100%{box-shadow:0 1px 4px rgba(0,0,0,0.04)} 50%{box-shadow:0 0 0 5px rgba(255,143,0,0.22)} }
 
-  /* Resaltado si es el horario actual */
-  .aviso-card.ahora {
-    border-color: var(--green);
-    background: #0a1f0a;
-  }
-
-  .aviso-icono { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
-
+  .aviso-icono { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
   .aviso-cuerpo { flex: 1; min-width: 0; }
-
-  .aviso-top {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 5px;
-    flex-wrap: wrap;
+  .aviso-top { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
+  .aviso-marca { font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: 900; color: var(--text); }
+  .aviso-horario {
+    font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 900;
+    color: var(--orange); margin-left: auto; display: flex; align-items: center; gap: 4px;
   }
-
-  .aviso-marca { font-size: 15px; font-weight: 700; }
+  .aviso-horario.pronto { color: var(--amber); }
+  .aviso-horario.ya     { color: var(--green); }
+  .cuenta-regresiva { font-size: 12px; font-weight: 900; color: var(--amber); }
+  .aviso-texto { font-size: 16px; line-height: 1.65; color: #333; font-weight: 600; margin-top: 4px; }
+  .aviso-meta { font-size: 12px; color: var(--muted); margin-top: 6px; display: flex; gap: 8px; flex-wrap: wrap; }
 
   .tag {
-    font-size: 10px; font-weight: 700; letter-spacing: 1px;
-    padding: 2px 7px; border-radius: 4px;
-    text-transform: uppercase;
+    font-size: 9px; font-weight: 800; letter-spacing: 0.8px;
+    padding: 2px 8px; border-radius: 20px; text-transform: uppercase; white-space: nowrap;
   }
-  .tag-programa { background: #1a1a3a; color: var(--blue); border: 1px solid #2a2a5a; }
-  .tag-ahora    { background: #0a2a0a; color: var(--green); border: 1px solid #1a4a1a; }
-  .tag-urgente  { background: #2a0a0a; color: var(--red); border: 1px solid #4a1a1a; }
-  .tag-bloque   { background: #3a1a00; color: var(--amber); border: 1px solid #5a2a00; }
-  .tag-frecuencia { background: #1a3a1a; color: var(--green); border: 1px solid #2a5a2a; }
+  .tag-ahora      { background: #e8f8d8; color: #3a8000; border: 1px solid #b0e080; }
+  .tag-urgente    { background: #ffe8e8; color: #c0001a; border: 1px solid #ffb0b8; }
+  .tag-alerta     { background: #fff4e0; color: #b06000; border: 1px solid #ffd898; }
+  .tag-tipo       { background: #e8f4ff; color: #1a6abf; border: 1px solid #b8d8f8; }
+  .tag-frecuencia { background: #e8f8e8; color: #306030; border: 1px solid #a0d8a0; }
 
-  .aviso-horario {
-    font-size: 13px; font-weight: 700; color: var(--amber);
-    display: flex; align-items: center; gap: 4px;
+  /* ITEMS RADIO (compactos) */
+  .radio-item {
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 10px; padding: 9px 12px;
+    cursor: pointer; position: relative; overflow: hidden;
+    transition: box-shadow 0.15s, border-color 0.15s;
+    display: flex; align-items: center; gap: 8px;
   }
-
-  .aviso-texto {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #ddd;
-    margin-top: 4px;
+  .radio-item::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 4px; background: var(--sky); border-radius: 10px 0 0 10px;
   }
+  .radio-item.urgente::before { background: var(--red); }
+  .radio-item.alerta::before  { background: var(--amber); }
+  .radio-item.ahora::before   { background: var(--green); }
+  .radio-item.urgente { border-color: #ffcdd2; background: #fff8f8; animation: flashUrgente 2s infinite; }
+  .radio-item.alerta  { border-color: #ffd090; background: #fffaf0; animation: flashAlerta 1.2s infinite; }
+  .radio-item.ahora   { border-color: #c8f0a0; background: #f4fff0; }
+  .radio-item:hover   { box-shadow: 0 3px 12px rgba(0,0,0,0.1); border-color: var(--sky); }
 
-  .aviso-meta {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 6px;
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+  .radio-item-marca {
+    font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 900;
+    color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
+  .radio-item-hora {
+    font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 800;
+    color: var(--orange); white-space: nowrap; flex-shrink: 0;
+  }
+  .radio-item-hora.pronto { color: var(--amber); }
+  .radio-item-hora.ya     { color: var(--green); }
+  .radio-item-cr  { font-size: 10px; font-weight: 900; color: var(--amber); flex-shrink: 0; }
+  .radio-item-arr { font-size: 10px; color: var(--muted2); flex-shrink: 0; }
 
-  /* ── ESTADOS VACÍOS / CARGA ── */
-  .estado-vacio {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1000;
     align-items: center;
     justify-content: center;
-    color: var(--muted);
-    gap: 10px;
-    padding: 60px 20px;
-    text-align: center;
+    padding: 30px;
   }
-  .estado-vacio span { font-size: 42px; }
-  .estado-vacio p { font-size: 13px; line-height: 1.6; max-width: 280px; }
+  .modal-overlay.visible { display: flex; }
 
-  /* ── FOOTER ── */
-  .footer {
-    height: 36px;
+  .modal {
     background: var(--surface);
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    gap: 8px;
-    flex-shrink: 0;
+    border-radius: 20px;
+    padding: 32px 36px;
+    max-width: 680px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    position: relative;
+    border-top: 5px solid var(--sky);
+  }
+  .modal.urgente { border-top-color: var(--red); }
+  .modal.alerta  { border-top-color: var(--amber); }
+
+  .modal-cerrar {
+    position: absolute; top: 16px; right: 20px;
+    font-size: 22px; cursor: pointer; color: var(--muted);
+    background: none; border: none; line-height: 1;
+    transition: color 0.15s;
+  }
+  .modal-cerrar:hover { color: var(--text); }
+
+  .modal-marca {
+    font-family: 'Nunito', sans-serif; font-size: 26px; font-weight: 900;
+    color: var(--text); margin-bottom: 6px;
+  }
+  .modal-meta {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap;
+  }
+  .modal-hora {
+    font-family: 'Nunito', sans-serif; font-size: 18px; font-weight: 900; color: var(--orange);
+  }
+  .modal-hora.pronto { color: var(--amber); }
+  .modal-hora.ya     { color: var(--green); }
+  .modal-cr { font-size: 14px; font-weight: 900; color: var(--amber); }
+
+  .modal-copy {
+    font-size: 19px; line-height: 1.75; color: #222; font-weight: 600;
+    white-space: pre-wrap;
+  }
+
+  .modal-footer {
+    margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);
+    display: flex; justify-content: flex-end;
+  }
+  .modal-btn-cerrar {
+    font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800;
+    background: var(--sky); color: #fff; border: none;
+    padding: 10px 28px; border-radius: 20px; cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .modal-btn-cerrar:hover { opacity: 0.85; }
+
+  /* VACÍO */
+  .estado-vacio {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: var(--muted); gap: 8px; padding: 30px 12px; text-align: center;
+  }
+  .estado-vacio span { font-size: 28px; }
+  .estado-vacio p { font-size: 11px; line-height: 1.6; max-width: 160px; font-weight: 600; }
+
+  /* FOOTER */
+  .footer {
+    height: 32px; background: var(--surface); border-top: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 20px; gap: 8px; flex-shrink: 0;
   }
   .footer-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
-  .footer-dot.sin-conexion { background: var(--muted); }
-  .footer-text { font-size: 11px; color: var(--muted); }
-  .footer-update { margin-left: auto; font-size: 11px; color: var(--muted); }
-
-  /* Scrollbar */
-  .lista::-webkit-scrollbar { width: 4px; }
-  .lista::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .footer-dot.sin-conexion { background: var(--muted2); }
+  .footer-text   { font-size: 11px; color: var(--muted); font-weight: 600; }
+  .footer-update { margin-left: auto; font-size: 11px; color: var(--muted2); }
 </style>
 </head>
 <body>
 
 <!-- TOPBAR -->
 <div class="topbar">
-  <div class="station">RADIO <span>MILA</span> FM 88.7</div>
+  <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="46" fill="none" stroke="#e8e6e0" stroke-width="2"/>
+    <path d="M50 4 A46 46 0 0 1 96 50" fill="none" stroke="#e91e8c" stroke-width="8" stroke-linecap="round"/>
+    <path d="M96 50 A46 46 0 0 1 73 89" fill="none" stroke="#ff6d00" stroke-width="8" stroke-linecap="round"/>
+    <path d="M73 89 A46 46 0 0 1 27 89" fill="none" stroke="#c8c800" stroke-width="8" stroke-linecap="round"/>
+    <path d="M27 89 A46 46 0 0 1 4 50" fill="none" stroke="#6abf00" stroke-width="8" stroke-linecap="round"/>
+    <path d="M4 50 A46 46 0 0 1 50 4" fill="none" stroke="#29b6e8" stroke-width="8" stroke-linecap="round"/>
+    <text x="50" y="50" text-anchor="middle" dominant-baseline="middle"
+      font-family="'Nunito', sans-serif" font-weight="900" font-size="22" fill="#1a1a1a">MILA</text>
+    <text x="50" y="66" text-anchor="middle" dominant-baseline="middle"
+      font-family="'Nunito Sans', sans-serif" font-weight="700" font-size="9" fill="#888">FM 88.7</text>
+  </svg>
+  <div class="station">RADIO MILA<span class="fm">FM 88.7</span></div>
   <div class="on-air"><div class="dot"></div>AL AIRE</div>
-  <div style="display:flex;align-items:flex-end;gap:6px;margin-left:auto">
+  <div style="display:flex;align-items:flex-end;gap:8px;margin-left:auto">
     <div class="clock" id="reloj">00:00:00</div>
     <div class="fecha" id="fecha"></div>
   </div>
 </div>
 
-<!-- PROGRAMA ACTUAL -->
+<!-- PROGRAMA BAR -->
 <div class="programa-bar">
-  <span class="programa-label">Programa actual</span>
-  <span class="programa-nombre" id="programaNombre">—</span>
-  <span class="programa-horario" id="programaHorario"></span>
+  <div class="prog-pill">
+    <div class="prog-dot"></div>
+    <div>
+      <div class="prog-label">Programa actual</div>
+      <div class="prog-nombre" id="programaNombre">—</div>
+    </div>
+  </div>
+  <span class="prog-horario" id="programaHorario"></span>
   <div class="avisos-pendientes">
-    <span id="contadorLabel" style="font-size:12px;color:var(--muted)">Menciones:</span>
+    <span>Avisos activos:</span>
     <span class="badge-count" id="contadorBadge">0</span>
   </div>
 </div>
 
-<!-- LISTA DE AVISOS -->
-<div class="lista" id="listaAvisos">
-  <div class="estado-vacio">
-    <span>⏳</span>
-    <p>Cargando avisos...</p>
+<!-- COLUMNAS -->
+<div class="columnas">
+
+  <!-- 75% Programa -->
+  <div class="columna-programa">
+    <div class="col-header programa">
+      <span class="col-titulo">📻 Menciones Programa</span>
+      <span class="col-badge" id="badgePrograma">0</span>
+    </div>
+    <div class="lista-programa" id="listaPrograma">
+      <div class="estado-vacio"><span>⏳</span><p>Cargando...</p></div>
+    </div>
+  </div>
+
+  <!-- 25% Radio -->
+  <div class="columna-radio">
+    <div class="col-header radio">
+      <span class="col-titulo">🎙️ Menciones Radio</span>
+      <span class="col-badge" id="badgeRadio">0</span>
+    </div>
+    <div class="lista-radio" id="listaRadio">
+      <div class="estado-vacio"><span>⏳</span><p>Cargando...</p></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-cerrar" id="modalCerrar">✕</button>
+    <div class="modal-marca" id="modalMarca"></div>
+    <div class="modal-meta">
+      <span class="modal-hora" id="modalHora"></span>
+      <span class="modal-cr" id="modalCr"></span>
+      <span class="tag" id="modalTag"></span>
+    </div>
+    <div class="modal-copy" id="modalCopy"></div>
+    <div class="modal-footer">
+      <button class="modal-btn-cerrar" id="modalBtnCerrar">Cerrar</button>
+    </div>
   </div>
 </div>
 
@@ -269,263 +387,274 @@
 </div>
 
 <script>
-// ============================================================
-// RADIO MILA FM 88.7 - PANEL ESTUDIO
-// ============================================================
-
-// ✅ URL CORREGIDA - Usa la URL de tu Apps Script actual
 const API = 'https://script.google.com/macros/s/AKfycbzDEDFLIl94LxJa74BfGZ2aceVtDq1ui_D5gm4K9UUBJOeX4BKlhoPSoYgi23-cyU6v/exec';
 
-let PROGRAMAS = [];
-let avisos = [];
+const PROGRAMAS_CONFIG = [
+  { nombre: 'La Mañana Alegre',      inicio: '09:00', fin: '13:00' },
+  { nombre: 'Haciendo la Hora',      inicio: '15:00', fin: '17:00' },
+  { nombre: 'Actualizando la Tarde', inicio: '17:00', fin: '19:00' }
+];
+const MENCIONES_RADIO_KEY = 'Menciones Radio';
 
-// ── RELOJ ──────────────────────────────────────────────────
+let PROGRAMAS = PROGRAMAS_CONFIG;
+let avisos = [];
+let modalAvisoActivo = null;
+
+// RELOJ
 function actualizarReloj() {
   const ahora = new Date();
   const h = String(ahora.getHours()).padStart(2,'0');
   const m = String(ahora.getMinutes()).padStart(2,'0');
   const s = String(ahora.getSeconds()).padStart(2,'0');
   document.getElementById('reloj').textContent = `${h}:${m}:${s}`;
-
   const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
   const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
   document.getElementById('fecha').innerHTML =
     `${dias[ahora.getDay()]}<br>${ahora.getDate()} ${meses[ahora.getMonth()]} ${ahora.getFullYear()}`;
-
   actualizarProgramaActual();
-  actualizarEstadoAvisos();
+  actualizarEstados();
+  if (modalAvisoActivo) actualizarModal(modalAvisoActivo);
 }
 setInterval(actualizarReloj, 1000);
 actualizarReloj();
 
-// ── PROGRAMA ACTUAL ─────────────────────────────────────────
+// HELPERS
 function horaEnMinutos(str) {
   if (!str) return null;
-  const [h, m] = str.split(':').map(Number);
-  if (isNaN(h) || isNaN(m)) return null;
-  return h * 60 + m;
+  const p = String(str).split(':').map(Number);
+  if (p.length < 2 || isNaN(p[0]) || isNaN(p[1])) return null;
+  return p[0] * 60 + p[1];
 }
-
+function minutosActuales() {
+  const a = new Date(); return a.getHours() * 60 + a.getMinutes();
+}
 function getProgramaActual() {
-  const ahora = new Date();
-  const minutos = ahora.getHours() * 60 + ahora.getMinutes();
+  const min = minutosActuales();
   return PROGRAMAS.find(p => {
     const ini = horaEnMinutos(p.inicio);
     let fin = horaEnMinutos(p.fin);
-    if (fin === null || ini === null) return false;
-    if (fin === 0) fin = 24 * 60;
-    return minutos >= ini && minutos < fin;
+    if (ini === null || fin === null) return false;
+    if (fin === 0) fin = 1440;
+    return min >= ini && min < fin;
   }) || null;
 }
-
 function actualizarProgramaActual() {
   const prog = getProgramaActual();
-  const el = document.getElementById('programaNombre');
-  const hor = document.getElementById('programaHorario');
-  if (prog) {
-    el.textContent = prog.nombre;
-    hor.textContent = `${prog.inicio} – ${prog.fin}`;
-  } else {
-    el.textContent = 'Sin programa activo';
-    hor.textContent = '';
-  }
+  document.getElementById('programaNombre').textContent = prog ? prog.nombre : 'Sin programa activo';
+  document.getElementById('programaHorario').textContent = prog ? `${prog.inicio} – ${prog.fin}` : '';
+}
+function esUrgente(a) { return a.urgente === true || a.urgente === 'true' || a.urgente === 1; }
+function getEstadoAviso(a) {
+  if (esUrgente(a)) return 'urgente';
+  if (!a.hora) return 'normal';
+  const min = horaEnMinutos(a.hora);
+  if (min === null) return 'normal';
+  const diff = min - minutosActuales();
+  if (diff >= 0 && diff <= 5) return 'alerta';
+  if (diff < 0 && diff >= -10) return 'ahora';
+  return 'normal';
+}
+function getHorarioTexto(a) {
+  if (a.hora) return '⏰ ' + a.hora;
+  if (a.bloque) return '📦 ' + a.bloque;
+  if (a.frecuencia) return '🔁 ' + a.frecuencia;
+  return '';
+}
+function getTipoTag(a) {
+  const map = { horario_fijo:'⏰ Horario fijo', bloque:'📦 Bloque', mencion:'🔁 Frecuencia' };
+  return map[a.tipo] || a.tipo || '';
+}
+function getCuentaRegresiva(a) {
+  if (!a.hora) return '';
+  const min = horaEnMinutos(a.hora);
+  if (min === null) return '';
+  const diff = min - minutosActuales();
+  if (diff === 0) return '⚡ ¡YA!';
+  if (diff > 0 && diff <= 5) return `⚡ ${diff} min`;
+  return '';
 }
 
-// ── FUNCIONES DE HORARIO ────────────────────────────────────
-// ✅ CORREGIDO: Usa el campo 'hora' en vez de 'horario'
-function esHorarioActivo(horaStr) {
-  if (!horaStr) return false;
-  // Formato esperado: "10:30" (hora simple)
-  const min = horaEnMinutos(horaStr);
-  if (min === null) return false;
-  const ahora = new Date();
-  const minActual = ahora.getHours() * 60 + ahora.getMinutes();
-  // Considera activo si estamos en la misma hora (±5 min)
-  return Math.abs(minActual - min) <= 5;
+// CARD PROGRAMA (grande)
+function mkCardPrograma(a) {
+  const estado = getEstadoAviso(a);
+  const card = document.createElement('div');
+  card.dataset.id = String(a.id);
+  card.className = 'aviso-card ' + estado;
+  const iconos = { urgente:'🔴', alerta:'⚠️', ahora:'📍', normal:'📢' };
+  const cr = getCuentaRegresiva(a);
+  const horClass = estado==='alerta'?'pronto':estado==='ahora'?'ya':'';
+
+  card.innerHTML = `
+    <div class="aviso-icono">${iconos[estado]||'📢'}</div>
+    <div class="aviso-cuerpo">
+      <div class="aviso-top">
+        <span class="aviso-marca">${a.marca||'Sin marca'}</span>
+        ${esUrgente(a)?'<span class="tag tag-urgente">⚡ URGENTE</span>':''}
+        ${estado==='ahora'&&!esUrgente(a)?'<span class="tag tag-ahora">📍 Ahora</span>':''}
+        ${estado==='alerta'?'<span class="tag tag-alerta">⚠️ Pronto</span>':''}
+        <span class="aviso-horario ${horClass}">${getHorarioTexto(a)}${cr?` <span class="cuenta-regresiva">${cr}</span>`:''}</span>
+      </div>
+      <div class="aviso-texto">${a.copy||'Sin texto'}</div>
+      <div class="aviso-meta"><span class="tag tag-tipo">${getTipoTag(a)}</span></div>
+    </div>`;
+  return card;
 }
 
-function esProximo(horaStr) {
-  if (!horaStr) return false;
-  const min = horaEnMinutos(horaStr);
-  if (min === null) return false;
-  const ahora = new Date();
-  const minActual = ahora.getHours() * 60 + ahora.getMinutes();
-  return min > minActual && min - minActual <= 30;
+// ITEM RADIO (compacto)
+function mkItemRadio(a) {
+  const estado = getEstadoAviso(a);
+  const item = document.createElement('div');
+  item.dataset.id = String(a.id);
+  item.className = 'radio-item ' + estado;
+  const cr = getCuentaRegresiva(a);
+  const horClass = estado==='alerta'?'pronto':estado==='ahora'?'ya':'';
+  const horTexto = getHorarioTexto(a);
+
+  item.innerHTML = `
+    <span class="radio-item-marca">${a.marca||'Sin marca'}</span>
+    ${cr?`<span class="radio-item-cr">${cr}</span>`:''}
+    ${horTexto?`<span class="radio-item-hora ${horClass}">${horTexto}</span>`:''}
+    <span class="radio-item-arr">▶</span>`;
+
+  item.addEventListener('click', () => abrirModal(a));
+  return item;
 }
 
-// ── RENDERIZAR AVISOS ───────────────────────────────────────
-function actualizarEstadoAvisos() {
+// MODAL
+function abrirModal(a) {
+  modalAvisoActivo = a;
+  const estado = getEstadoAviso(a);
+  const modal = document.getElementById('modal');
+  modal.className = 'modal ' + (estado !== 'normal' ? estado : '');
+
+  document.getElementById('modalMarca').textContent = a.marca || 'Sin marca';
+  document.getElementById('modalCopy').textContent = a.copy || 'Sin texto';
+
+  const horTexto = getHorarioTexto(a);
+  const horEl = document.getElementById('modalHora');
+  horEl.textContent = horTexto;
+  horEl.className = 'modal-hora' + (estado==='alerta'?' pronto':estado==='ahora'?' ya':'');
+
+  actualizarModal(a);
+
+  const tag = document.getElementById('modalTag');
+  tag.textContent = getTipoTag(a);
+  tag.className = 'tag tag-tipo';
+
+  document.getElementById('modalOverlay').classList.add('visible');
+}
+
+function actualizarModal(a) {
+  const cr = getCuentaRegresiva(a);
+  document.getElementById('modalCr').textContent = cr;
+}
+
+function cerrarModal() {
+  document.getElementById('modalOverlay').classList.remove('visible');
+  modalAvisoActivo = null;
+}
+
+document.getElementById('modalCerrar').addEventListener('click', cerrarModal);
+document.getElementById('modalBtnCerrar').addEventListener('click', cerrarModal);
+document.getElementById('modalOverlay').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('modalOverlay')) cerrarModal();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrarModal(); });
+
+// ACTUALIZAR ESTADOS CADA SEGUNDO
+function actualizarEstados() {
   document.querySelectorAll('.aviso-card[data-id]').forEach(card => {
-    const id = card.dataset.id;
-    const aviso = avisos.find(a => String(a.id) === id);
-    if (!aviso) return;
-    const activo = esHorarioActivo(aviso.hora);
-    const prox = esProximo(aviso.hora);
-    card.classList.toggle('ahora', activo && !esUrgente(aviso));
-    card.classList.toggle('proximo', prox && !activo && !esUrgente(aviso));
-    
-    const tagAhora = card.querySelector('.tag-ahora');
-    if (activo && !tagAhora && !esUrgente(aviso)) {
-      const tag = document.createElement('span');
-      tag.className = 'tag tag-ahora'; 
-      tag.textContent = '📍 AHORA';
-      card.querySelector('.aviso-top').insertBefore(tag, card.querySelector('.aviso-horario'));
-    } else if (!activo && tagAhora) {
-      tagAhora.remove();
-    }
+    const a = avisos.find(x => String(x.id) === card.dataset.id);
+    if (!a) return;
+    const estado = getEstadoAviso(a);
+    card.className = 'aviso-card ' + estado;
+    const crEl = card.querySelector('.cuenta-regresiva');
+    if (crEl) crEl.textContent = getCuentaRegresiva(a);
+    ['tag-ahora','tag-alerta'].forEach(cls => { const t=card.querySelector('.'+cls); if(t) t.remove(); });
+    const top = card.querySelector('.aviso-top');
+    const horEl = card.querySelector('.aviso-horario');
+    if (estado==='ahora'&&!esUrgente(a)) { const t=document.createElement('span'); t.className='tag tag-ahora'; t.textContent='📍 Ahora'; top.insertBefore(t,horEl); }
+    if (estado==='alerta') { const t=document.createElement('span'); t.className='tag tag-alerta'; t.textContent='⚠️ Pronto'; top.insertBefore(t,horEl); }
   });
+  document.querySelectorAll('.radio-item[data-id]').forEach(item => {
+    const a = avisos.find(x => String(x.id) === item.dataset.id);
+    if (!a) return;
+    const estado = getEstadoAviso(a);
+    item.className = 'radio-item ' + estado;
+    const crEl = item.querySelector('.radio-item-cr');
+    const cr = getCuentaRegresiva(a);
+    if (crEl) crEl.textContent = cr;
+  });
+}
 
-  const programa = getProgramaActual();
-  const programaNombre = programa ? programa.nombre : null;
-  const avisosPrograma = programaNombre
-    ? avisos.filter(a => a.programa === programaNombre)
-    : avisos;
+// ORDENAR
+function ordenar(lista) {
+  return lista.sort((a,b) => {
+    if (esUrgente(a)&&!esUrgente(b)) return -1;
+    if (!esUrgente(a)&&esUrgente(b)) return 1;
+    return (horaEnMinutos(a.hora)??9999)-(horaEnMinutos(b.hora)??9999);
+  });
+}
 
+// RENDER
+function renderListas() {
+  const prog = getProgramaActual();
+  const progNombre = prog ? prog.nombre : null;
+
+  const avisosPrograma = progNombre ? avisos.filter(a => a.programa === progNombre) : [];
+  const avisosRadio    = avisos.filter(a => a.programa === MENCIONES_RADIO_KEY);
+
+  // Lista programa
+  const lp = document.getElementById('listaPrograma');
+  lp.innerHTML = '';
+  if (avisosPrograma.length === 0) {
+    lp.innerHTML = `<div class="estado-vacio"><span>📭</span><p>${progNombre?'Sin avisos para este programa':'Sin programa activo ahora'}</p></div>`;
+  } else {
+    ordenar([...avisosPrograma]).forEach(a => lp.appendChild(mkCardPrograma(a)));
+  }
+
+  // Lista radio
+  const lr = document.getElementById('listaRadio');
+  lr.innerHTML = '';
+  if (avisosRadio.length === 0) {
+    lr.innerHTML = `<div class="estado-vacio"><span>📭</span><p>Sin menciones radio</p></div>`;
+  } else {
+    ordenar([...avisosRadio]).forEach(a => lr.appendChild(mkItemRadio(a)));
+  }
+
+  document.getElementById('badgePrograma').textContent = avisosPrograma.length;
+  document.getElementById('badgeRadio').textContent    = avisosRadio.length;
+
+  const total    = avisosPrograma.length + avisosRadio.length;
   const urgentes = avisos.filter(a => esUrgente(a)).length;
-  const badge = document.getElementById('contadorBadge');
-  badge.textContent = avisosPrograma.length;
-  badge.className = 'badge-count' + (urgentes > 0 ? ' urgente' : '');
+  const badge    = document.getElementById('contadorBadge');
+  badge.textContent = total;
+  badge.className   = 'badge-count' + (urgentes > 0 ? ' urgente' : '');
+
+  actualizarEstados();
 }
 
-// ✅ CORREGIDO: Maneja urgente como booleano o string
-function esUrgente(aviso) {
-  return aviso.urgente === true || aviso.urgente === 'true' || aviso.urgente === 1;
-}
-
-// ✅ CORREGIDO: Genera el texto de horario según el tipo de aviso
-function getHorarioTexto(aviso) {
-  if (aviso.hora) return aviso.hora;
-  if (aviso.bloque) return aviso.bloque;
-  if (aviso.frecuencia) return aviso.frecuencia;
-  return '—';
-}
-
-// ✅ CORREGIDO: Genera el tag según el tipo
-function getTipoTag(aviso) {
-  const tipoMap = {
-    'horario_fijo': '⏰ HORARIO FIJO',
-    'bloque': '📦 BLOQUE',
-    'mencion': '🔁 FRECUENCIA'
-  };
-  return tipoMap[aviso.tipo] || aviso.tipo;
-}
-
-function renderAvisos() {
-  const lista = document.getElementById('listaAvisos');
-
-  if (avisos.length === 0) {
-    lista.innerHTML = `
-      <div class="estado-vacio">
-        <span>📭</span>
-        <p>Sin avisos programados.<br>Patricia puede agregar desde Telegram.</p>
-      </div>`;
-    return;
-  }
-
-  const programa = getProgramaActual();
-  const programaNombre = programa ? programa.nombre : null;
-
-  // Separar: urgentes primero, luego del programa actual, luego el resto
-  const urgentes  = avisos.filter(a => esUrgente(a));
-  const delProg   = avisos.filter(a => !esUrgente(a) && a.programa === programaNombre);
-  const otros     = avisos.filter(a => !esUrgente(a) && a.programa !== programaNombre);
-  const ordenados = [...urgentes, ...delProg, ...otros];
-
-  lista.innerHTML = '';
-
-  // Sección: programa actual
-  if (programaNombre && delProg.length > 0) {
-    const sep = document.createElement('div');
-    sep.style.cssText = 'font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;padding:4px 0 8px 0;';
-    sep.textContent = `📻 ${programaNombre}`;
-    lista.appendChild(sep);
-  }
-
-  ordenados.forEach(a => {
-    const activo = esHorarioActivo(a.hora);
-    const prox   = esProximo(a.hora);
-    const urgente = esUrgente(a);
-
-    const card = document.createElement('div');
-    card.dataset.id = String(a.id);
-    card.className = 'aviso-card' +
-      (urgente ? ' urgente' : '') +
-      (activo && !urgente ? ' ahora' : '') +
-      (prox && !activo && !urgente ? ' proximo' : '');
-
-    const icono = urgente ? '🔴' : activo ? '📍' : '📢';
-
-    card.innerHTML = `
-      <div class="aviso-icono">${icono}</div>
-      <div class="aviso-cuerpo">
-        <div class="aviso-top">
-          <span class="aviso-marca">${a.marca || 'Sin marca'}</span>
-          <span class="tag tag-programa">${a.programa || '—'}</span>
-          ${urgente ? '<span class="tag tag-urgente">⚡ URGENTE</span>' : ''}
-          ${activo && !urgente ? '<span class="tag tag-ahora">📍 AHORA</span>' : ''}
-          <span class="aviso-horario">⏰ ${getHorarioTexto(a)}</span>
-        </div>
-        <div class="aviso-texto">${a.copy || 'Sin texto'}</div>
-        <div class="aviso-meta">
-          <span class="tag tag-${a.tipo === 'bloque' ? 'bloque' : a.tipo === 'mencion' ? 'frecuencia' : 'programa'}">${getTipoTag(a)}</span>
-          ${a.bloque ? `<span>📦 ${a.bloque}</span>` : ''}
-          ${a.frecuencia ? `<span>🔁 ${a.frecuencia}</span>` : ''}
-        </div>
-      </div>`;
-
-    lista.appendChild(card);
-
-    // Separador antes de "otros"
-    if (a === delProg[delProg.length - 1] && otros.length > 0) {
-      const sep2 = document.createElement('div');
-      sep2.style.cssText = 'font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;padding:8px 0 4px 0;';
-      sep2.textContent = 'Otros programas';
-      lista.appendChild(sep2);
-    }
-  });
-
-  actualizarEstadoAvisos();
-}
-
-// ── CARGAR AVISOS DESDE APPS SCRIPT ─────────────────────────
+// CARGAR
 async function cargarAvisos() {
   try {
     const res = await fetch(API);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    
-    // ✅ Soporte para respuesta con {avisos, programas, radio}
-    if (Array.isArray(data)) {
-      avisos = data;
-    } else {
-      avisos = data.avisos || [];
-      if (data.programas && data.programas.length > 0) {
-        PROGRAMAS = data.programas;
-      }
-    }
-    
-    renderAvisos();
-    
-    // Mostrar estado
+    avisos = Array.isArray(data) ? data : (data.avisos || []);
+    if (!Array.isArray(data) && data.programas && data.programas.length > 0) PROGRAMAS = data.programas;
+    renderListas();
     document.getElementById('footerDot').className = 'footer-dot';
     document.getElementById('footerText').textContent = 'En línea · Radio Mila FM 88.7';
-    document.getElementById('footerUpdate').textContent =
-      'Actualizado: ' + new Date().toLocaleTimeString('es-CL');
-  } catch (e) {
+    document.getElementById('footerUpdate').textContent = 'Actualizado: ' + new Date().toLocaleTimeString('es-CL');
+  } catch(e) {
     document.getElementById('footerDot').className = 'footer-dot sin-conexion';
     document.getElementById('footerText').textContent = 'Sin conexión · ' + e.message;
-    console.error('Error cargando avisos:', e);
-    
-    // Mostrar error en la lista
-    document.getElementById('listaAvisos').innerHTML = `
-      <div class="estado-vacio">
-        <span>⚠️</span>
-        <p>Error de conexión<br>${e.message}<br><br>Verifica que la URL de la API sea correcta.</p>
-      </div>`;
+    ['listaPrograma','listaRadio'].forEach(id => {
+      document.getElementById(id).innerHTML = `<div class="estado-vacio"><span>⚠️</span><p>Error de conexión</p></div>`;
+    });
   }
 }
 
-// Cargar al inicio y cada 30 segundos
 cargarAvisos();
 setInterval(cargarAvisos, 30000);
 </script>
