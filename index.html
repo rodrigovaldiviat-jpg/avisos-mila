@@ -16,11 +16,11 @@
     --muted2: #bbb;
     --pink:   #e91e8c;
     --orange: #ff6d00;
-    --yellow: #c8b800;
     --green:  #6abf00;
     --sky:    #29b6e8;
     --red:    #e8002d;
     --amber:  #ff8f00;
+    --yellow: #c8b800;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,9 +29,7 @@
     background: var(--bg);
     color: var(--text);
     font-family: 'Nunito Sans', sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+    display: flex; flex-direction: column; height: 100vh;
   }
 
   /* TOPBAR */
@@ -57,10 +55,7 @@
   .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; animation: blink 1s infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
-  /* CLIMA + SANTO */
-  .info-extra {
-    display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
-  }
+  .info-extra { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
   .clima-pill {
     display: flex; align-items: center; gap: 5px;
     background: #e8f6ff; border: 1px solid #b8e0f8;
@@ -69,22 +64,11 @@
   .clima-icon { font-size: 14px; }
   .clima-temp { font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 900; color: #1a6abf; }
   .clima-desc { font-size: 10px; color: #4a8abf; font-weight: 600; }
-
-  .santo-pill {
-    display: flex; align-items: center; gap: 4px;
-    font-size: 10px; color: var(--muted); font-weight: 600;
-  }
+  .santo-pill { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--muted); font-weight: 600; }
   .santo-pill span { color: var(--orange); font-weight: 800; }
 
-  /* RELOJ */
-  .reloj-bloque {
-    display: flex; align-items: flex-end; gap: 8px; margin-left: auto;
-  }
-  .clock {
-    font-family: 'Nunito', sans-serif;
-    font-size: 26px; font-weight: 900; font-variant-numeric: tabular-nums;
-    color: var(--orange); letter-spacing: 2px;
-  }
+  .reloj-bloque { display: flex; align-items: flex-end; gap: 8px; margin-left: auto; }
+  .clock { font-family: 'Nunito', sans-serif; font-size: 26px; font-weight: 900; font-variant-numeric: tabular-nums; color: var(--orange); letter-spacing: 2px; }
   .fecha { font-size: 10px; color: var(--muted); text-align: right; line-height: 1.4; font-weight: 600; }
 
   /* PROGRAMA BAR */
@@ -109,154 +93,160 @@
   }
   .badge-count.urgente { background: linear-gradient(135deg, var(--red), #b00020); }
 
-  /* COLUMNAS */
-  .columnas { flex: 1; display: flex; overflow: hidden; }
-  .columna-programa { flex: 3; display: flex; flex-direction: column; overflow: hidden; border-right: 2px solid var(--border); }
-  .columna-radio { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--surface2); }
-
-  .col-header {
-    padding: 10px 16px 8px; background: var(--surface);
-    border-bottom: 3px solid var(--border);
-    flex-shrink: 0; display: flex; align-items: center; gap: 8px;
+  /* LAYOUT PRINCIPAL */
+  .main {
+    flex: 1; display: flex; overflow: hidden;
   }
-  .col-header.programa { border-bottom-color: var(--orange); }
-  .col-header.radio    { border-bottom-color: var(--sky); }
-  .col-titulo { font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
-  .col-header.programa .col-titulo { color: var(--orange); }
-  .col-header.radio    .col-titulo { color: var(--sky); }
-  .col-badge { font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 900; padding: 1px 7px; border-radius: 10px; color: #fff; }
-  .col-header.programa .col-badge { background: var(--orange); }
-  .col-header.radio    .col-badge { background: var(--sky); }
 
-  .lista-programa {
-    flex: 1; overflow-y: auto; padding: 12px 16px;
-    display: flex; flex-direction: column; gap: 10px; background: var(--bg);
+  /* PANEL CENTRAL - texto del aviso seleccionado */
+  .panel-centro {
+    flex: 1; display: flex; flex-direction: column;
+    overflow: hidden; background: var(--bg);
+    border-right: 2px solid var(--border);
   }
-  .lista-programa::-webkit-scrollbar { width: 4px; }
-  .lista-programa::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-  .lista-radio {
+  .centro-header {
+    padding: 16px 24px 12px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .centro-marca {
+    font-family: 'Nunito', sans-serif;
+    font-size: 28px; font-weight: 900; color: var(--text);
+    margin-bottom: 6px;
+  }
+  .centro-meta {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .centro-horario {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px; font-weight: 900; color: var(--orange);
+  }
+  .centro-horario.pronto { color: var(--amber); }
+  .centro-horario.ya     { color: var(--green); }
+  .centro-cr { font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 900; color: var(--amber); }
+
+  .centro-body {
+    flex: 1; overflow-y: auto; padding: 24px;
+  }
+  .centro-body::-webkit-scrollbar { width: 4px; }
+  .centro-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .centro-copy {
+    font-size: 22px; line-height: 1.8; color: #222;
+    font-weight: 600; white-space: pre-wrap;
+  }
+
+  .centro-vacio {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: var(--muted); gap: 12px; text-align: center; padding: 40px;
+  }
+  .centro-vacio span { font-size: 50px; }
+  .centro-vacio p { font-size: 16px; font-weight: 600; max-width: 300px; line-height: 1.6; }
+
+  /* PANEL DERECHO - lista de avisos */
+  .panel-derecho {
+    width: 280px; flex-shrink: 0;
+    display: flex; flex-direction: column; overflow: hidden;
+    background: var(--surface2);
+  }
+
+  .derecho-seccion {
+    flex-shrink: 0;
+    padding: 8px 12px 6px;
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px; font-weight: 900;
+    text-transform: uppercase; letter-spacing: 1px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .derecho-seccion.programa { color: var(--orange); border-bottom-color: var(--orange); }
+  .derecho-seccion.radio    { color: var(--sky);    border-bottom-color: var(--sky); }
+  .seccion-badge {
+    font-size: 10px; font-weight: 900; padding: 1px 7px;
+    border-radius: 10px; color: #fff;
+  }
+  .derecho-seccion.programa .seccion-badge { background: var(--orange); }
+  .derecho-seccion.radio    .seccion-badge { background: var(--sky); }
+
+  .lista-avisos {
     flex: 1; overflow-y: auto; padding: 8px;
-    display: flex; flex-direction: column; gap: 6px;
+    display: flex; flex-direction: column; gap: 5px;
   }
-  .lista-radio::-webkit-scrollbar { width: 3px; }
-  .lista-radio::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  .lista-avisos::-webkit-scrollbar { width: 3px; }
+  .lista-avisos::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-  /* CARDS PROGRAMA */
-  .aviso-card {
+  /* ITEM DE AVISO en lista derecha */
+  .aviso-item {
     background: var(--surface); border: 1.5px solid var(--border);
-    border-radius: 14px; padding: 16px 18px;
-    display: flex; gap: 12px; align-items: flex-start;
-    position: relative; overflow: hidden;
-    transition: box-shadow 0.2s;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    border-radius: 10px; padding: 10px 12px;
+    cursor: pointer; position: relative; overflow: hidden;
+    transition: box-shadow 0.15s, border-color 0.15s, background 0.15s;
+    display: flex; align-items: center; gap: 8px;
   }
-  .aviso-card::before {
+  .aviso-item::before {
     content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 5px; background: var(--border); border-radius: 14px 0 0 14px;
+    width: 4px; border-radius: 10px 0 0 10px;
+    background: var(--border);
   }
-  .aviso-card.urgente::before { background: linear-gradient(180deg, var(--red), #ff6b6b); }
-  .aviso-card.ahora::before   { background: linear-gradient(180deg, var(--green), #a8e063); }
-  .aviso-card.alerta::before  { background: linear-gradient(180deg, var(--amber), var(--yellow)); }
-  .aviso-card.urgente { border-color: #ffcdd2; background: #fff8f8; animation: flashUrgente 2s infinite; }
-  @keyframes flashUrgente { 0%,100%{box-shadow:0 1px 4px rgba(0,0,0,0.04)} 50%{box-shadow:0 0 0 4px rgba(232,0,45,0.18)} }
-  .aviso-card.ahora { border-color: #c8f0a0; background: #f4fff0; }
-  .aviso-card.alerta { border-color: #ffd090; background: #fffaf0; animation: flashAlerta 1.2s infinite; }
-  @keyframes flashAlerta { 0%,100%{box-shadow:0 1px 4px rgba(0,0,0,0.04)} 50%{box-shadow:0 0 0 5px rgba(255,143,0,0.22)} }
+  .aviso-item.urgente::before { background: var(--red); }
+  .aviso-item.alerta::before  { background: var(--amber); }
+  .aviso-item.ahora::before   { background: var(--green); }
+  .aviso-item.radio-item::before { background: var(--sky); }
 
-  .aviso-icono { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
-  .aviso-cuerpo { flex: 1; min-width: 0; }
-  .aviso-top { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
-  .aviso-marca { font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: 900; color: var(--text); }
-  .aviso-horario {
-    font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 900;
-    color: var(--orange); margin-left: auto; display: flex; align-items: center; gap: 4px;
+  .aviso-item.urgente { border-color: #ffcdd2; background: #fff8f8; animation: flashU 2s infinite; }
+  @keyframes flashU { 0%,100%{box-shadow:0 1px 3px rgba(0,0,0,0.04)} 50%{box-shadow:0 0 0 3px rgba(232,0,45,0.15)} }
+  .aviso-item.alerta { border-color: #ffd090; background: #fffaf0; animation: flashA 1.2s infinite; }
+  @keyframes flashA { 0%,100%{box-shadow:0 1px 3px rgba(0,0,0,0.04)} 50%{box-shadow:0 0 0 3px rgba(255,143,0,0.2)} }
+  .aviso-item.ahora  { border-color: #c8f0a0; background: #f4fff0; }
+
+  .aviso-item.seleccionado {
+    border-color: var(--orange) !important;
+    background: #fff8f0 !important;
+    box-shadow: 0 2px 10px rgba(255,109,0,0.15) !important;
   }
-  .aviso-horario.pronto { color: var(--amber); }
-  .aviso-horario.ya     { color: var(--green); }
-  .cuenta-regresiva { font-size: 12px; font-weight: 900; color: var(--amber); }
-  .aviso-texto { font-size: 16px; line-height: 1.65; color: #333; font-weight: 600; margin-top: 4px; }
-  .aviso-meta { font-size: 12px; color: var(--muted); margin-top: 6px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .aviso-item.seleccionado.radio-item { border-color: var(--sky) !important; background: #f0f8ff !important; box-shadow: 0 2px 10px rgba(41,182,232,0.15) !important; }
+
+  .aviso-item:hover:not(.seleccionado) { box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-color: var(--muted2); }
+
+  .item-icono { font-size: 14px; flex-shrink: 0; }
+  .item-info { flex: 1; min-width: 0; }
+  .item-marca {
+    font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 900;
+    color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .item-sub {
+    font-size: 10px; color: var(--muted); font-weight: 600; margin-top: 1px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .item-cr { font-size: 10px; font-weight: 900; color: var(--amber); flex-shrink: 0; }
 
   .tag {
     font-size: 9px; font-weight: 800; letter-spacing: 0.8px;
-    padding: 2px 8px; border-radius: 20px; text-transform: uppercase; white-space: nowrap;
+    padding: 2px 7px; border-radius: 20px; text-transform: uppercase; white-space: nowrap;
   }
   .tag-ahora      { background: #e8f8d8; color: #3a8000; border: 1px solid #b0e080; }
   .tag-urgente    { background: #ffe8e8; color: #c0001a; border: 1px solid #ffb0b8; }
   .tag-alerta     { background: #fff4e0; color: #b06000; border: 1px solid #ffd898; }
-  .tag-tipo       { background: #e8f4ff; color: #1a6abf; border: 1px solid #b8d8f8; }
 
-  /* ITEMS RADIO */
-  .radio-item {
-    background: var(--surface); border: 1.5px solid var(--border);
-    border-radius: 10px; padding: 9px 12px;
-    cursor: pointer; position: relative; overflow: hidden;
-    transition: box-shadow 0.15s, border-color 0.15s;
-    display: flex; align-items: center; gap: 8px;
+  .separador-radio {
+    padding: 8px 12px 4px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 10px; font-weight: 900; color: var(--sky);
+    text-transform: uppercase; letter-spacing: 1px;
+    border-top: 1px solid var(--border); margin-top: 4px;
+    display: flex; align-items: center; gap: 6px;
+    flex-shrink: 0;
   }
-  .radio-item::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 4px; background: var(--sky); border-radius: 10px 0 0 10px;
-  }
-  .radio-item.urgente::before { background: var(--red); }
-  .radio-item.alerta::before  { background: var(--amber); }
-  .radio-item.ahora::before   { background: var(--green); }
-  .radio-item.urgente { border-color: #ffcdd2; background: #fff8f8; animation: flashUrgente 2s infinite; }
-  .radio-item.alerta  { border-color: #ffd090; background: #fffaf0; animation: flashAlerta 1.2s infinite; }
-  .radio-item.ahora   { border-color: #c8f0a0; background: #f4fff0; }
-  .radio-item:hover   { box-shadow: 0 3px 12px rgba(0,0,0,0.1); border-color: var(--sky); }
-  .radio-item-marca { font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 900; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .radio-item-hora { font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 800; color: var(--orange); white-space: nowrap; flex-shrink: 0; }
-  .radio-item-hora.pronto { color: var(--amber); }
-  .radio-item-hora.ya     { color: var(--green); }
-  .radio-item-cr  { font-size: 10px; font-weight: 900; color: var(--amber); flex-shrink: 0; }
-  .radio-item-arr { font-size: 10px; color: var(--muted2); flex-shrink: 0; }
+  .separador-radio .seccion-badge { background: var(--sky); }
 
-  /* MODAL */
-  .modal-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.55); z-index: 1000;
-    align-items: center; justify-content: center; padding: 30px;
+  .estado-vacio-lista {
+    padding: 20px 12px; text-align: center;
+    color: var(--muted); font-size: 12px; font-weight: 600;
   }
-  .modal-overlay.visible { display: flex; }
-  .modal {
-    background: var(--surface); border-radius: 20px; padding: 32px 36px;
-    max-width: 680px; width: 100%; max-height: 80vh; overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.25); position: relative;
-    border-top: 5px solid var(--sky);
-  }
-  .modal.urgente { border-top-color: var(--red); }
-  .modal.alerta  { border-top-color: var(--amber); }
-  .modal-cerrar {
-    position: absolute; top: 16px; right: 20px;
-    font-size: 22px; cursor: pointer; color: var(--muted);
-    background: none; border: none; line-height: 1; transition: color 0.15s;
-  }
-  .modal-cerrar:hover { color: var(--text); }
-  .modal-marca { font-family: 'Nunito', sans-serif; font-size: 26px; font-weight: 900; color: var(--text); margin-bottom: 6px; }
-  .modal-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
-  .modal-hora { font-family: 'Nunito', sans-serif; font-size: 18px; font-weight: 900; color: var(--orange); }
-  .modal-hora.pronto { color: var(--amber); }
-  .modal-hora.ya     { color: var(--green); }
-  .modal-cr { font-size: 14px; font-weight: 900; color: var(--amber); }
-  .modal-copy { font-size: 19px; line-height: 1.75; color: #222; font-weight: 600; white-space: pre-wrap; }
-  .modal-footer { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; }
-  .modal-btn-cerrar {
-    font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800;
-    background: var(--sky); color: #fff; border: none;
-    padding: 10px 28px; border-radius: 20px; cursor: pointer; transition: opacity 0.15s;
-  }
-  .modal-btn-cerrar:hover { opacity: 0.85; }
-
-  /* VACÍO */
-  .estado-vacio {
-    flex: 1; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    color: var(--muted); gap: 8px; padding: 30px 12px; text-align: center;
-  }
-  .estado-vacio span { font-size: 28px; }
-  .estado-vacio p { font-size: 11px; line-height: 1.6; max-width: 160px; font-weight: 600; }
 
   /* FOOTER */
   .footer {
@@ -280,15 +270,11 @@
     <path d="M73 89 A46 46 0 0 1 27 89" fill="none" stroke="#c8c800" stroke-width="8" stroke-linecap="round"/>
     <path d="M27 89 A46 46 0 0 1 4 50" fill="none" stroke="#6abf00" stroke-width="8" stroke-linecap="round"/>
     <path d="M4 50 A46 46 0 0 1 50 4" fill="none" stroke="#29b6e8" stroke-width="8" stroke-linecap="round"/>
-    <text x="50" y="50" text-anchor="middle" dominant-baseline="middle"
-      font-family="'Nunito', sans-serif" font-weight="900" font-size="22" fill="#1a1a1a">MILA</text>
-    <text x="50" y="66" text-anchor="middle" dominant-baseline="middle"
-      font-family="'Nunito Sans', sans-serif" font-weight="700" font-size="9" fill="#888">FM 88.7</text>
+    <text x="50" y="50" text-anchor="middle" dominant-baseline="middle" font-family="'Nunito', sans-serif" font-weight="900" font-size="22" fill="#1a1a1a">MILA</text>
+    <text x="50" y="66" text-anchor="middle" dominant-baseline="middle" font-family="'Nunito Sans', sans-serif" font-weight="700" font-size="9" fill="#888">FM 88.7</text>
   </svg>
   <div class="station">RADIO MILA<span class="fm">FM 88.7</span></div>
   <div class="on-air"><div class="dot"></div>AL AIRE</div>
-
-  <!-- CLIMA + SANTO -->
   <div class="info-extra">
     <div class="clima-pill">
       <span class="clima-icon" id="climaIcon">🌤️</span>
@@ -297,7 +283,6 @@
     </div>
     <div class="santo-pill">✝️ Hoy: <span id="santoHoy">—</span></div>
   </div>
-
   <div class="reloj-bloque">
     <div class="clock" id="reloj">00:00:00</div>
     <div class="fecha" id="fecha"></div>
@@ -320,43 +305,28 @@
   </div>
 </div>
 
-<!-- COLUMNAS -->
-<div class="columnas">
-  <div class="columna-programa">
-    <div class="col-header programa">
-      <span class="col-titulo">📻 Menciones Programa</span>
-      <span class="col-badge" id="badgePrograma">0</span>
-    </div>
-    <div class="lista-programa" id="listaPrograma">
-      <div class="estado-vacio"><span>⏳</span><p>Cargando...</p></div>
-    </div>
-  </div>
-  <div class="columna-radio">
-    <div class="col-header radio">
-      <span class="col-titulo">🎙️ Menciones Radio</span>
-      <span class="col-badge" id="badgeRadio">0</span>
-    </div>
-    <div class="lista-radio" id="listaRadio">
-      <div class="estado-vacio"><span>⏳</span><p>Cargando...</p></div>
-    </div>
-  </div>
-</div>
+<!-- MAIN -->
+<div class="main">
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal" id="modal">
-    <button class="modal-cerrar" id="modalCerrar">✕</button>
-    <div class="modal-marca" id="modalMarca"></div>
-    <div class="modal-meta">
-      <span class="modal-hora" id="modalHora"></span>
-      <span class="modal-cr" id="modalCr"></span>
-      <span class="tag" id="modalTag"></span>
-    </div>
-    <div class="modal-copy" id="modalCopy"></div>
-    <div class="modal-footer">
-      <button class="modal-btn-cerrar" id="modalBtnCerrar">Cerrar</button>
+  <!-- CENTRO: texto del aviso seleccionado -->
+  <div class="panel-centro">
+    <div id="centroContenido">
+      <div class="centro-vacio" id="centroVacio">
+        <span>👆</span>
+        <p>Selecciona un aviso de la lista para ver el texto completo</p>
+      </div>
     </div>
   </div>
+
+  <!-- DERECHO: lista de avisos -->
+  <div class="panel-derecho">
+    <div class="derecho-seccion programa">
+      📻 Programa
+      <span class="seccion-badge" id="badgePrograma">0</span>
+    </div>
+    <div class="lista-avisos" id="listaAvisos"></div>
+  </div>
+
 </div>
 
 <!-- FOOTER -->
@@ -378,411 +348,254 @@ const MENCIONES_RADIO_KEY = 'Menciones Radio';
 
 let PROGRAMAS = PROGRAMAS_CONFIG;
 let avisos = [];
-let modalAvisoActivo = null;
+let avisoSeleccionado = null;
 
-// ── SANTOS DEL AÑO (católico) ──
+// SANTOS
 const SANTOS = {
-  '1-1':'María Santísima','1-2':'Santos Basilio y Gregorio','1-3':'Santísimo Nombre de Jesús',
-  '1-4':'Santa Isabel Ana Seton','1-5':'San Juan Neumann','1-6':'Santos Reyes Magos',
-  '1-7':'San Raimundo de Peñafort','1-8':'San Apolinar','1-9':'San Adrián',
-  '1-10':'San Gonzalo','1-11':'San Higinio','1-12':'San Arcadio',
-  '1-13':'San Hilario','1-14':'San Félix de Nola','1-15':'San Mauro',
-  '1-16':'San Marcelo','1-17':'San Antonio Abad','1-18':'Santa Prisca',
-  '1-19':'San Mario','1-20':'San Fabián y San Sebastián','1-21':'Santa Inés',
-  '1-22':'San Vicente','1-23':'San Ildefonso','1-24':'San Francisco de Sales',
-  '1-25':'Conversión de San Pablo','1-26':'Santos Timoteo y Tito','1-27':'Santa Ángela de Mérici',
-  '1-28':'Santo Tomás de Aquino','1-29':'San Valero','1-30':'Santa Martina','1-31':'San Juan Bosco',
-  '2-1':'San Ignacio de Antioquía','2-2':'Presentación del Señor','2-3':'San Blas',
-  '2-4':'San Andrés Corsini','2-5':'Santa Águeda','2-6':'Santos Pablo Miki y compañeros',
-  '2-7':'San Ricardo','2-8':'San Jerónimo Emiliani','2-9':'Santa Apolonia',
-  '2-10':'Santa Escolástica','2-11':'Nuestra Señora de Lourdes','2-12':'Santa Eulalia',
-  '2-13':'San Benigno','2-14':'San Valentín','2-15':'San Faustino',
-  '2-16':'San Julián','2-17':'Los Siete Fundadores de la Orden de los Servitas','2-18':'San Eladio',
-  '2-19':'San Álvaro','2-20':'San Eleuterio','2-21':'San Pedro Damián',
-  '2-22':'Cátedra de San Pedro','2-23':'San Policarpo','2-24':'San Modesto',
-  '2-25':'San Cesáreo','2-26':'San Alejandro','2-27':'San Gabriel de la Dolorosa',
-  '2-28':'San Román','2-29':'San Osvaldo',
-  '3-1':'San Rosendo','3-2':'San Simplicio','3-3':'San Emeterio',
-  '3-4':'San Casimiro','3-5':'San Adrián y Eubulo','3-6':'Santos Perpetua y Felicidad',
-  '3-7':'Santo Tomás de Aquino','3-8':'San Juan de Dios','3-9':'Santa Francisca Romana',
-  '3-10':'San Macario','3-11':'San Eulogio','3-12':'San Gregorio Magno',
-  '3-13':'San Rodrigo','3-14':'Santa Matilde','3-15':'San Clemente María Hofbauer',
-  '3-16':'San Heriberto','3-17':'San Patricio','3-18':'San Cirilo de Jerusalén',
-  '3-19':'San José','3-20':'San Martín','3-21':'San Benito',
-  '3-22':'San Deogracias','3-23':'San Toribio de Mogrovejo','3-24':'San Óscar Romero',
-  '3-25':'Anunciación del Señor','3-26':'San Braulio','3-27':'San Ruperto',
-  '3-28':'San Sixto III','3-29':'San Segundo','3-30':'San Juan Clímaco','3-31':'Santa Balbina',
-  '4-1':'San Hugo','4-2':'San Francisco de Paula','4-3':'San Ricardo',
-  '4-4':'San Isidoro de Sevilla','4-5':'San Vicente Ferrer','4-6':'San Celestino',
-  '4-7':'San Juan Bautista de la Salle','4-8':'San Alberto Magno','4-9':'Santa María Cleofé',
-  '4-10':'San Ezequiel Moreno','4-11':'San Estanislao','4-12':'San Zenón',
-  '4-13':'San Martín I','4-14':'San Tiburcio','4-15':'Santa Anastasia',
-  '4-16':'Santa Bernadette','4-17':'San Aniceto','4-18':'San Perfecto',
-  '4-19':'San León IX','4-20':'Santa Inés de Montepulciano','4-21':'San Anselmo',
-  '4-22':'San Sotero','4-23':'San Jorge','4-24':'San Fidel de Sigmaringa',
-  '4-25':'San Marcos','4-26':'Nuestra Señora del Buen Consejo','4-27':'San Pedro Canisio',
-  '4-28':'San Luis María Grignion de Montfort','4-29':'Santa Catalina de Siena','4-30':'San Pío V',
-  '5-1':'San José Obrero','5-2':'San Atanasio','5-3':'Santos Felipe y Santiago',
-  '5-4':'Santa Mónica','5-5':'San Ángelo','5-6':'San Evodio',
-  '5-7':'San Estanislao de Cracovia','5-8':'San Víctor','5-9':'San Gregorio Nacianceno',
-  '5-10':'San Antonino','5-11':'San Mamerto','5-12':'Santos Nereo y Aquileo',
-  '5-13':'Nuestra Señora de Fátima','5-14':'San Matías','5-15':'San Isidro Labrador',
-  '5-16':'San Andrés Bobola','5-17':'San Pascual Baylón','5-18':'San Juan I',
-  '5-19':'San Celestino V','5-20':'San Bernardino de Siena','5-21':'San Félix de Cantalicio',
-  '5-22':'Santa Rita de Casia','5-23':'San Desiderio','5-24':'San Donaciamo',
-  '5-25':'San Gregorio VII','5-26':'San Felipe Neri','5-27':'San Agustín de Canterbury',
-  '5-28':'San Germán','5-29':'San Maximino','5-30':'San Fernando','5-31':'Visitación de la Virgen',
-  '6-1':'San Justino','6-2':'Santos Marcelino y Pedro','6-3':'San Carlos Lwanga',
-  '6-4':'San Francisco Caracciolo','6-5':'San Bonifacio','6-6':'San Norberto',
-  '6-7':'San Roberto','6-8':'San Salustiano','6-9':'San Efrén',
-  '6-10':'San Landerico','6-11':'San Bernabé','6-12':'San Juan de Sahagún',
-  '6-13':'San Antonio de Padua','6-14':'San Eliseo','6-15':'San Vito',
-  '6-16':'San Aureliano','6-17':'San Gregorio Barbarigo','6-18':'San Efrén',
-  '6-19':'San Romualdo','6-20':'San Silverio','6-21':'San Luis Gonzaga',
-  '6-22':'San Paulino de Nola','6-23':'San José Cafasso','6-24':'San Juan Bautista',
-  '6-25':'San Guillermo','6-26':'San Josemaría Escrivá','6-27':'San Cirilo de Alejandría',
-  '6-28':'San Ireneo','6-29':'Santos Pedro y Pablo','6-30':'Primeros Mártires de Roma',
-  '7-1':'San Junípero Serra','7-2':'Santos Proceso y Martiniano','7-3':'Santo Tomás',
-  '7-4':'San Elizardo','7-5':'San Antonio María Zaccaria','7-6':'Santa María Goretti',
-  '7-7':'San Fermín','7-8':'Santa Isabel de Portugal','7-9':'San Agustín Zhao Rong',
-  '7-10':'San Rufina','7-11':'San Benito','7-12':'San Juan Gualberto',
-  '7-13':'San Enrique','7-14':'San Camilo de Lelis','7-15':'San Buenaventura',
-  '7-16':'Nuestra Señora del Carmen','7-17':'San Alejo','7-18':'San Federico',
-  '7-19':'San Vicente de Paúl','7-20':'San Aurelio','7-21':'San Lorenzo de Brindisi',
-  '7-22':'Santa María Magdalena','7-23':'Santa Brígida','7-24':'San Francisco Solano',
-  '7-25':'Santiago Apóstol','7-26':'Santos Joaquín y Ana','7-27':'San Pantaleón',
-  '7-28':'Santos Nazario y Celso','7-29':'Santa Marta','7-30':'San Pedro Crisólogo','7-31':'San Ignacio de Loyola',
-  '8-1':'San Alfonso María de Ligorio','8-2':'San Eusebio de Vercelli','8-3':'San Nicodemus',
-  '8-4':'San Juan María Vianney','8-5':'Dedicación de Santa María la Mayor','8-6':'Transfiguración del Señor',
-  '8-7':'San Cayetano','8-8':'San Domingo de Guzmán','8-9':'San Romano',
-  '8-10':'San Lorenzo','8-11':'Santa Clara','8-12':'Santa Juana Chantal',
-  '8-13':'Santos Ponciano e Hipólito','8-14':'San Maximiliano Kolbe','8-15':'Asunción de la Virgen',
-  '8-16':'San Roque','8-17':'San Jacinto','8-18':'Santa Elena',
-  '8-19':'San Juan Eudes','8-20':'San Bernardo','8-21':'San Pío X',
-  '8-22':'Inmaculado Corazón de María','8-23':'Santa Rosa de Lima','8-24':'San Bartolomé',
-  '8-25':'San Luis IX','8-26':'San Ceferino','8-27':'Santa Mónica',
-  '8-28':'San Agustín','8-29':'Martirio de San Juan Bautista','8-30':'Santa Rosa de Lima','8-31':'San Ramón Nonato',
-  '9-1':'San Gil','9-2':'San Esteban de Hungría','9-3':'San Gregorio Magno',
-  '9-4':'Santa Rosa de Viterbo','9-5':'San Lorenzo Giustiniani','9-6':'San Zacarías',
-  '9-7':'Santa Regina','9-8':'Natividad de la Virgen María','9-9':'San Pedro Claver',
-  '9-10':'San Nicolás de Tolentino','9-11':'San Emiliano','9-12':'El Santísimo Nombre de María',
-  '9-13':'San Juan Crisóstomo','9-14':'Exaltación de la Santa Cruz','9-15':'Nuestra Señora de los Dolores',
-  '9-16':'Santos Cornelio y Cipriano','9-17':'San Roberto Belarmino','9-18':'Santo Tomás de Villanueva',
-  '9-19':'San Jenaro','9-20':'Santos Andrés Kim y compañeros','9-21':'San Mateo',
-  '9-22':'San Mauricio','9-23':'San Pío de Pietrelcina','9-24':'Nuestra Señora de las Mercedes',
-  '9-25':'San Cleofás','9-26':'Santos Cosme y Damián','9-27':'San Vicente de Paúl',
-  '9-28':'San Wenceslao','9-29':'Santos Miguel, Gabriel y Rafael','9-30':'San Jerónimo',
-  '10-1':'Santa Teresa del Niño Jesús','10-2':'Ángeles Custodios','10-3':'San Gerardo',
-  '10-4':'San Francisco de Asís','10-5':'San Plácido','10-6':'San Bruno',
-  '10-7':'Nuestra Señora del Rosario','10-8':'Santa Pelagia','10-9':'San Denis',
-  '10-10':'San Francisco de Borja','10-11':'San Juan XXIII','10-12':'Nuestra Señora del Pilar',
-  '10-13':'San Eduardo','10-14':'San Calixto I','10-15':'Santa Teresa de Ávila',
-  '10-16':'Santa Margarita María Alacoque','10-17':'San Ignacio de Antioquía','10-18':'San Lucas',
-  '10-19':'San Pablo de la Cruz','10-20':'San Juan de Capistrano','10-21':'San Hilarión',
-  '10-22':'San Juan Pablo II','10-23':'San Juan de Capistrano','10-24':'San Antonio María Claret',
-  '10-25':'Santos Crispín y Crispiniano','10-26':'San Evaristo','10-27':'San Frumentio',
-  '10-28':'Santos Simón y Judas','10-29':'San Narciso','10-30':'San Alonso Rodríguez','10-31':'San Quintín',
-  '11-1':'Todos los Santos','11-2':'Todos los Fieles Difuntos','11-3':'San Martín de Porres',
-  '11-4':'San Carlos Borromeo','11-5':'San Zacarías','11-6':'San Leonardo de Noblac',
-  '11-7':'San Ernesto','11-8':'San Godofredo','11-9':'Dedicación de la Basílica de Letrán',
-  '11-10':'San León Magno','11-11':'San Martín de Tours','11-12':'San Josafat',
-  '11-13':'San Estanislao Kostka','11-14':'San Lorenzo O\'Toole','11-15':'San Alberto Magno',
-  '11-16':'Santa Gertrudis','11-17':'Santa Isabel de Hungría','11-18':'San Román',
-  '11-19':'Santa Isabel','11-20':'San Edmundo','11-21':'Presentación de la Virgen María',
-  '11-22':'Santa Cecilia','11-23':'San Clemente I','11-24':'San Andrés Dung-Lac',
-  '11-25':'Santa Catalina de Alejandría','11-26':'San Leonardo de Port Maurice','11-27':'San Virgilio',
-  '11-28':'San Esteban el Joven','11-29':'San Saturnino','11-30':'San Andrés Apóstol',
-  '12-1':'San Eloy','12-2':'Santa Bibiana','12-3':'San Francisco Javier',
-  '12-4':'San Juan Damasceno','12-5':'San Sabas','12-6':'San Nicolás',
-  '12-7':'San Ambrosio','12-8':'Inmaculada Concepción','12-9':'San Juan Diego',
-  '12-10':'Nuestra Señora de Loreto','12-11':'San Dámaso I','12-12':'Nuestra Señora de Guadalupe',
-  '12-13':'Santa Lucía','12-14':'San Juan de la Cruz','12-15':'San Urbicio',
-  '12-16':'San Adón','12-17':'San Lázaro','12-18':'Nuestra Señora de la Esperanza',
-  '12-19':'San Nemesio','12-20':'Santo Domingo de Silos','12-21':'San Pedro Canisio',
-  '12-22':'San Queremón','12-23':'San Juan de Kety','12-24':'San Delfín',
-  '12-25':'Natividad del Señor','12-26':'San Esteban','12-27':'San Juan Evangelista',
-  '12-28':'Santos Inocentes','12-29':'Santo Tomás Becket','12-30':'San Sabino','12-31':'San Silvestre'
+  '1-1':'María Santísima','1-2':'Santos Basilio y Gregorio','1-3':'Santísimo Nombre de Jesús','1-4':'Santa Isabel Ana Seton','1-5':'San Juan Neumann','1-6':'Santos Reyes Magos','1-7':'San Raimundo de Peñafort','1-8':'San Apolinar','1-9':'San Adrián','1-10':'San Gonzalo','1-11':'San Higinio','1-12':'San Arcadio','1-13':'San Hilario','1-14':'San Félix de Nola','1-15':'San Mauro','1-16':'San Marcelo','1-17':'San Antonio Abad','1-18':'Santa Prisca','1-19':'San Mario','1-20':'San Fabián y San Sebastián','1-21':'Santa Inés','1-22':'San Vicente','1-23':'San Ildefonso','1-24':'San Francisco de Sales','1-25':'Conversión de San Pablo','1-26':'Santos Timoteo y Tito','1-27':'Santa Ángela de Mérici','1-28':'Santo Tomás de Aquino','1-29':'San Valero','1-30':'Santa Martina','1-31':'San Juan Bosco',
+  '2-1':'San Ignacio de Antioquía','2-2':'Presentación del Señor','2-3':'San Blas','2-4':'San Andrés Corsini','2-5':'Santa Águeda','2-6':'Santos Pablo Miki y compañeros','2-7':'San Ricardo','2-8':'San Jerónimo Emiliani','2-9':'Santa Apolonia','2-10':'Santa Escolástica','2-11':'Nuestra Señora de Lourdes','2-12':'Santa Eulalia','2-13':'San Benigno','2-14':'San Valentín','2-15':'San Faustino','2-16':'San Julián','2-17':'Los Siete Fundadores','2-18':'San Eladio','2-19':'San Álvaro','2-20':'San Eleuterio','2-21':'San Pedro Damián','2-22':'Cátedra de San Pedro','2-23':'San Policarpo','2-24':'San Modesto','2-25':'San Cesáreo','2-26':'San Alejandro','2-27':'San Gabriel de la Dolorosa','2-28':'San Román','2-29':'San Osvaldo',
+  '3-1':'San Rosendo','3-2':'San Simplicio','3-3':'San Emeterio','3-4':'San Casimiro','3-5':'San Adrián','3-6':'Santos Perpetua y Felicidad','3-7':'Santo Tomás de Aquino','3-8':'San Juan de Dios','3-9':'Santa Francisca Romana','3-10':'San Macario','3-11':'San Eulogio','3-12':'San Gregorio Magno','3-13':'San Rodrigo','3-14':'Santa Matilde','3-15':'San Clemente María','3-16':'San Heriberto','3-17':'San Patricio','3-18':'San Cirilo de Jerusalén','3-19':'San José','3-20':'San Martín','3-21':'San Benito','3-22':'San Deogracias','3-23':'San Toribio de Mogrovejo','3-24':'San Óscar Romero','3-25':'Anunciación del Señor','3-26':'San Braulio','3-27':'San Ruperto','3-28':'San Sixto III','3-29':'San Segundo','3-30':'San Juan Clímaco','3-31':'Santa Balbina',
+  '4-1':'San Hugo','4-2':'San Francisco de Paula','4-3':'San Ricardo','4-4':'San Isidoro de Sevilla','4-5':'San Vicente Ferrer','4-6':'San Celestino','4-7':'San Juan Bautista de la Salle','4-8':'San Alberto Magno','4-9':'Santa María Cleofé','4-10':'San Ezequiel Moreno','4-11':'San Estanislao','4-12':'San Zenón','4-13':'San Martín I','4-14':'San Tiburcio','4-15':'Santa Anastasia','4-16':'Santa Bernadette','4-17':'San Aniceto','4-18':'San Perfecto','4-19':'San León IX','4-20':'Santa Inés de Montepulciano','4-21':'San Anselmo','4-22':'San Sotero','4-23':'San Jorge','4-24':'San Fidel de Sigmaringa','4-25':'San Marcos','4-26':'Nuestra Señora del Buen Consejo','4-27':'San Pedro Canisio','4-28':'San Luis María Grignion','4-29':'Santa Catalina de Siena','4-30':'San Pío V',
+  '5-1':'San José Obrero','5-2':'San Atanasio','5-3':'Santos Felipe y Santiago','5-4':'Santa Mónica','5-5':'San Ángelo','5-6':'San Evodio','5-7':'San Estanislao de Cracovia','5-8':'San Víctor','5-9':'San Gregorio Nacianceno','5-10':'San Antonino','5-11':'San Mamerto','5-12':'Santos Nereo y Aquileo','5-13':'Nuestra Señora de Fátima','5-14':'San Matías','5-15':'San Isidro Labrador','5-16':'San Andrés Bobola','5-17':'San Pascual Baylón','5-18':'San Juan I','5-19':'San Celestino V','5-20':'San Bernardino de Siena','5-21':'San Félix de Cantalicio','5-22':'Santa Rita de Casia','5-23':'San Desiderio','5-24':'San Donaciamo','5-25':'San Gregorio VII','5-26':'San Felipe Neri','5-27':'San Agustín de Canterbury','5-28':'San Germán','5-29':'San Maximino','5-30':'San Fernando','5-31':'Visitación de la Virgen',
+  '6-1':'San Justino','6-2':'Santos Marcelino y Pedro','6-3':'San Carlos Lwanga','6-4':'San Francisco Caracciolo','6-5':'San Bonifacio','6-6':'San Norberto','6-7':'San Roberto','6-8':'San Salustiano','6-9':'San Efrén','6-10':'San Landerico','6-11':'San Bernabé','6-12':'San Juan de Sahagún','6-13':'San Antonio de Padua','6-14':'San Eliseo','6-15':'San Vito','6-16':'San Aureliano','6-17':'San Gregorio Barbarigo','6-18':'San Efrén','6-19':'San Romualdo','6-20':'San Silverio','6-21':'San Luis Gonzaga','6-22':'San Paulino de Nola','6-23':'San José Cafasso','6-24':'San Juan Bautista','6-25':'San Guillermo','6-26':'San Josemaría Escrivá','6-27':'San Cirilo de Alejandría','6-28':'San Ireneo','6-29':'Santos Pedro y Pablo','6-30':'Primeros Mártires de Roma',
+  '7-1':'San Junípero Serra','7-2':'Santos Proceso y Martiniano','7-3':'Santo Tomás','7-4':'San Elizardo','7-5':'San Antonio María Zaccaria','7-6':'Santa María Goretti','7-7':'San Fermín','7-8':'Santa Isabel de Portugal','7-9':'San Agustín Zhao Rong','7-10':'San Rufina','7-11':'San Benito','7-12':'San Juan Gualberto','7-13':'San Enrique','7-14':'San Camilo de Lelis','7-15':'San Buenaventura','7-16':'Nuestra Señora del Carmen','7-17':'San Alejo','7-18':'San Federico','7-19':'San Vicente de Paúl','7-20':'San Aurelio','7-21':'San Lorenzo de Brindisi','7-22':'Santa María Magdalena','7-23':'Santa Brígida','7-24':'San Francisco Solano','7-25':'Santiago Apóstol','7-26':'Santos Joaquín y Ana','7-27':'San Pantaleón','7-28':'Santos Nazario y Celso','7-29':'Santa Marta','7-30':'San Pedro Crisólogo','7-31':'San Ignacio de Loyola',
+  '8-1':'San Alfonso María de Ligorio','8-2':'San Eusebio de Vercelli','8-3':'San Nicodemus','8-4':'San Juan María Vianney','8-5':'Dedicación de Santa María la Mayor','8-6':'Transfiguración del Señor','8-7':'San Cayetano','8-8':'San Domingo de Guzmán','8-9':'San Romano','8-10':'San Lorenzo','8-11':'Santa Clara','8-12':'Santa Juana Chantal','8-13':'Santos Ponciano e Hipólito','8-14':'San Maximiliano Kolbe','8-15':'Asunción de la Virgen','8-16':'San Roque','8-17':'San Jacinto','8-18':'Santa Elena','8-19':'San Juan Eudes','8-20':'San Bernardo','8-21':'San Pío X','8-22':'Inmaculado Corazón de María','8-23':'Santa Rosa de Lima','8-24':'San Bartolomé','8-25':'San Luis IX','8-26':'San Ceferino','8-27':'Santa Mónica','8-28':'San Agustín','8-29':'Martirio de San Juan Bautista','8-30':'Santa Rosa de Lima','8-31':'San Ramón Nonato',
+  '9-1':'San Gil','9-2':'San Esteban de Hungría','9-3':'San Gregorio Magno','9-4':'Santa Rosa de Viterbo','9-5':'San Lorenzo Giustiniani','9-6':'San Zacarías','9-7':'Santa Regina','9-8':'Natividad de la Virgen María','9-9':'San Pedro Claver','9-10':'San Nicolás de Tolentino','9-11':'San Emiliano','9-12':'El Santísimo Nombre de María','9-13':'San Juan Crisóstomo','9-14':'Exaltación de la Santa Cruz','9-15':'Nuestra Señora de los Dolores','9-16':'Santos Cornelio y Cipriano','9-17':'San Roberto Belarmino','9-18':'Santo Tomás de Villanueva','9-19':'San Jenaro','9-20':'Santos Andrés Kim y compañeros','9-21':'San Mateo','9-22':'San Mauricio','9-23':'San Pío de Pietrelcina','9-24':'Nuestra Señora de las Mercedes','9-25':'San Cleofás','9-26':'Santos Cosme y Damián','9-27':'San Vicente de Paúl','9-28':'San Wenceslao','9-29':'Santos Miguel, Gabriel y Rafael','9-30':'San Jerónimo',
+  '10-1':'Santa Teresa del Niño Jesús','10-2':'Ángeles Custodios','10-3':'San Gerardo','10-4':'San Francisco de Asís','10-5':'San Plácido','10-6':'San Bruno','10-7':'Nuestra Señora del Rosario','10-8':'Santa Pelagia','10-9':'San Denis','10-10':'San Francisco de Borja','10-11':'San Juan XXIII','10-12':'Nuestra Señora del Pilar','10-13':'San Eduardo','10-14':'San Calixto I','10-15':'Santa Teresa de Ávila','10-16':'Santa Margarita María Alacoque','10-17':'San Ignacio de Antioquía','10-18':'San Lucas','10-19':'San Pablo de la Cruz','10-20':'San Juan de Capistrano','10-21':'San Hilarión','10-22':'San Juan Pablo II','10-23':'San Juan de Capistrano','10-24':'San Antonio María Claret','10-25':'Santos Crispín y Crispiniano','10-26':'San Evaristo','10-27':'San Frumentio','10-28':'Santos Simón y Judas','10-29':'San Narciso','10-30':'San Alonso Rodríguez','10-31':'San Quintín',
+  '11-1':'Todos los Santos','11-2':'Todos los Fieles Difuntos','11-3':'San Martín de Porres','11-4':'San Carlos Borromeo','11-5':'San Zacarías','11-6':'San Leonardo de Noblac','11-7':'San Ernesto','11-8':'San Godofredo','11-9':'Dedicación de la Basílica de Letrán','11-10':'San León Magno','11-11':'San Martín de Tours','11-12':'San Josafat','11-13':'San Estanislao Kostka','11-14':'San Lorenzo','11-15':'San Alberto Magno','11-16':'Santa Gertrudis','11-17':'Santa Isabel de Hungría','11-18':'San Román','11-19':'Santa Isabel','11-20':'San Edmundo','11-21':'Presentación de la Virgen María','11-22':'Santa Cecilia','11-23':'San Clemente I','11-24':'San Andrés Dung-Lac','11-25':'Santa Catalina de Alejandría','11-26':'San Leonardo','11-27':'San Virgilio','11-28':'San Esteban el Joven','11-29':'San Saturnino','11-30':'San Andrés Apóstol',
+  '12-1':'San Eloy','12-2':'Santa Bibiana','12-3':'San Francisco Javier','12-4':'San Juan Damasceno','12-5':'San Sabas','12-6':'San Nicolás','12-7':'San Ambrosio','12-8':'Inmaculada Concepción','12-9':'San Juan Diego','12-10':'Nuestra Señora de Loreto','12-11':'San Dámaso I','12-12':'Nuestra Señora de Guadalupe','12-13':'Santa Lucía','12-14':'San Juan de la Cruz','12-15':'San Urbicio','12-16':'San Adón','12-17':'San Lázaro','12-18':'Nuestra Señora de la Esperanza','12-19':'San Nemesio','12-20':'Santo Domingo de Silos','12-21':'San Pedro Canisio','12-22':'San Queremón','12-23':'San Juan de Kety','12-24':'San Delfín','12-25':'Natividad del Señor','12-26':'San Esteban','12-27':'San Juan Evangelista','12-28':'Santos Inocentes','12-29':'Santo Tomás Becket','12-30':'San Sabino','12-31':'San Silvestre'
 };
 
 function getSantoHoy() {
-  const hoy = new Date();
-  const key = `${hoy.getMonth()+1}-${hoy.getDate()}`;
-  return SANTOS[key] || '—';
+  const h = new Date(); return SANTOS[`${h.getMonth()+1}-${h.getDate()}`] || '—';
 }
 
-// ÍCONOS CLIMA
-function getClimaIcono(codigo) {
-  if (codigo <= 1) return '☀️';
-  if (codigo <= 3) return '⛅';
-  if (codigo <= 48) return '🌫️';
-  if (codigo <= 67) return '🌧️';
-  if (codigo <= 77) return '❄️';
-  if (codigo <= 82) return '🌦️';
-  if (codigo <= 99) return '⛈️';
-  return '🌤️';
+function getClimaIcono(c) {
+  if (c<=1) return '☀️'; if (c<=3) return '⛅'; if (c<=48) return '🌫️';
+  if (c<=67) return '🌧️'; if (c<=77) return '❄️'; if (c<=82) return '🌦️';
+  if (c<=99) return '⛈️'; return '🌤️';
 }
 
-// CARGAR CLIMA (Open-Meteo, gratis, sin API key)
-// Coordenadas Limache: -33.0, -71.09
 async function cargarClima() {
   try {
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=-33.0&longitude=-71.09&current=temperature_2m,weathercode&timezone=America%2FSantiago';
-    const res = await fetch(url);
-    const data = await res.json();
-    const temp = Math.round(data.current.temperature_2m);
-    const codigo = data.current.weathercode;
-    document.getElementById('climaTemp').textContent = `${temp}°C`;
-    document.getElementById('climaIcon').textContent = getClimaIcono(codigo);
-    document.getElementById('climaDesc').textContent = 'Limache';
-  } catch(e) {
-    document.getElementById('climaTemp').textContent = '--°C';
-    document.getElementById('climaDesc').textContent = 'Sin datos';
-  }
+    const r = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-33.0&longitude=-71.09&current=temperature_2m,weathercode&timezone=America%2FSantiago');
+    const d = await r.json();
+    document.getElementById('climaTemp').textContent = Math.round(d.current.temperature_2m) + '°C';
+    document.getElementById('climaIcon').textContent = getClimaIcono(d.current.weathercode);
+  } catch(e) { document.getElementById('climaTemp').textContent = '--°C'; }
 }
 
 // RELOJ
 function actualizarReloj() {
-  const ahora = new Date();
-  const h = String(ahora.getHours()).padStart(2,'0');
-  const m = String(ahora.getMinutes()).padStart(2,'0');
-  const s = String(ahora.getSeconds()).padStart(2,'0');
-  document.getElementById('reloj').textContent = `${h}:${m}:${s}`;
-  const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-  const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-  document.getElementById('fecha').innerHTML =
-    `${dias[ahora.getDay()]}<br>${ahora.getDate()} ${meses[ahora.getMonth()]} ${ahora.getFullYear()}`;
+  const a = new Date();
+  document.getElementById('reloj').textContent =
+    String(a.getHours()).padStart(2,'0')+':'+String(a.getMinutes()).padStart(2,'0')+':'+String(a.getSeconds()).padStart(2,'0');
+  const dias=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const meses=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  document.getElementById('fecha').innerHTML=`${dias[a.getDay()]}<br>${a.getDate()} ${meses[a.getMonth()]} ${a.getFullYear()}`;
   actualizarProgramaActual();
   actualizarEstados();
-  if (modalAvisoActivo) actualizarModal(modalAvisoActivo);
+  if (avisoSeleccionado) actualizarCentro(avisoSeleccionado);
 }
 setInterval(actualizarReloj, 1000);
 actualizarReloj();
-
-// Santo del día
 document.getElementById('santoHoy').textContent = getSantoHoy();
 
 // HELPERS
-function horaEnMinutos(str) {
+function horaEnMin(str) {
   if (!str) return null;
   const p = String(str).split(':').map(Number);
-  if (p.length < 2 || isNaN(p[0]) || isNaN(p[1])) return null;
-  return p[0] * 60 + p[1];
+  if (p.length<2||isNaN(p[0])||isNaN(p[1])) return null;
+  return p[0]*60+p[1];
 }
-function minutosActuales() { const a = new Date(); return a.getHours() * 60 + a.getMinutes(); }
+function minActual() { const a=new Date(); return a.getHours()*60+a.getMinutes(); }
 function getProgramaActual() {
-  const min = minutosActuales();
+  const m = minActual();
   return PROGRAMAS.find(p => {
-    const ini = horaEnMinutos(p.inicio);
-    let fin = horaEnMinutos(p.fin);
-    if (ini === null || fin === null) return false;
-    if (fin === 0) fin = 1440;
-    return min >= ini && min < fin;
-  }) || null;
+    const ini=horaEnMin(p.inicio), fin=horaEnMin(p.fin);
+    if (ini===null||fin===null) return false;
+    return m>=ini && m<(fin===0?1440:fin);
+  })||null;
 }
 function actualizarProgramaActual() {
-  const prog = getProgramaActual();
-  document.getElementById('programaNombre').textContent = prog ? prog.nombre : 'Sin programa activo';
-  document.getElementById('programaHorario').textContent = prog ? `${prog.inicio} – ${prog.fin}` : '';
+  const p = getProgramaActual();
+  document.getElementById('programaNombre').textContent = p?p.nombre:'Sin programa activo';
+  document.getElementById('programaHorario').textContent = p?`${p.inicio} – ${p.fin}`:'';
 }
-function esUrgente(a) { return a.urgente === true || a.urgente === 'true' || a.urgente === 1; }
-function getEstadoAviso(a) {
+function esUrgente(a) { return a.urgente===true||a.urgente==='true'||a.urgente===1; }
+function getEstado(a) {
   if (esUrgente(a)) return 'urgente';
   if (!a.hora) return 'normal';
-  const min = horaEnMinutos(a.hora);
-  if (min === null) return 'normal';
-  const diff = min - minutosActuales();
-  if (diff >= 0 && diff <= 5) return 'alerta';
-  if (diff < 0 && diff >= -10) return 'ahora';
+  const m=horaEnMin(a.hora); if (m===null) return 'normal';
+  const d=m-minActual();
+  if (d>=0&&d<=5) return 'alerta';
+  if (d<0&&d>=-10) return 'ahora';
   return 'normal';
 }
-function getHorarioTexto(a) {
-  if (a.hora) return '⏰ ' + a.hora;
-  if (a.bloque) return '📦 ' + a.bloque;
-  if (a.frecuencia) return '🔁 ' + a.frecuencia;
+function getHorTexto(a) {
+  if (a.hora) return '⏰ '+a.hora;
+  if (a.bloque) return '📦 '+a.bloque;
+  if (a.frecuencia) return '🔁 '+a.frecuencia;
   return '';
 }
-function getTipoTag(a) {
-  const map = { horario_fijo:'⏰ Horario fijo', bloque:'📦 Bloque', mencion:'🔁 Frecuencia' };
-  return map[a.tipo] || a.tipo || '';
-}
-function getCuentaRegresiva(a) {
+function getCR(a) {
   if (!a.hora) return '';
-  const min = horaEnMinutos(a.hora);
-  if (min === null) return '';
-  const diff = min - minutosActuales();
-  if (diff === 0) return '⚡ ¡YA!';
-  if (diff > 0 && diff <= 5) return `⚡ ${diff} min`;
+  const m=horaEnMin(a.hora); if (m===null) return '';
+  const d=m-minActual();
+  if (d===0) return '⚡ ¡YA!';
+  if (d>0&&d<=5) return `⚡ ${d} min`;
   return '';
 }
 
-// CARD PROGRAMA
-function mkCardPrograma(a) {
-  const estado = getEstadoAviso(a);
-  const card = document.createElement('div');
-  card.dataset.id = String(a.id);
-  card.className = 'aviso-card ' + estado;
-  const iconos = { urgente:'🔴', alerta:'⚠️', ahora:'📍', normal:'📢' };
-  const cr = getCuentaRegresiva(a);
+// CENTRO - mostrar aviso seleccionado
+function mostrarCentro(a) {
+  avisoSeleccionado = a;
+  const estado = getEstado(a);
   const horClass = estado==='alerta'?'pronto':estado==='ahora'?'ya':'';
-  card.innerHTML = `
-    <div class="aviso-icono">${iconos[estado]||'📢'}</div>
-    <div class="aviso-cuerpo">
-      <div class="aviso-top">
-        <span class="aviso-marca">${a.marca||'Sin marca'}</span>
+  const cr = getCR(a);
+
+  const centro = document.getElementById('centroContenido');
+  centro.innerHTML = `
+    <div class="centro-header">
+      <div class="centro-marca">${a.marca||'Sin marca'}</div>
+      <div class="centro-meta">
+        <span class="centro-horario ${horClass}">${getHorTexto(a)}</span>
+        ${cr?`<span class="centro-cr">${cr}</span>`:''}
         ${esUrgente(a)?'<span class="tag tag-urgente">⚡ URGENTE</span>':''}
         ${estado==='ahora'&&!esUrgente(a)?'<span class="tag tag-ahora">📍 Ahora</span>':''}
         ${estado==='alerta'?'<span class="tag tag-alerta">⚠️ Pronto</span>':''}
-        <span class="aviso-horario ${horClass}">${getHorarioTexto(a)}${cr?` <span class="cuenta-regresiva">${cr}</span>`:''}</span>
       </div>
-      <div class="aviso-texto">${a.copy||'Sin texto'}</div>
-      <div class="aviso-meta"><span class="tag tag-tipo">${getTipoTag(a)}</span></div>
+    </div>
+    <div class="centro-body">
+      <div class="centro-copy">${a.copy||'Sin texto'}</div>
     </div>`;
-  return card;
+
+  // Marcar seleccionado en lista
+  document.querySelectorAll('.aviso-item').forEach(el => el.classList.remove('seleccionado'));
+  const itemEl = document.querySelector(`.aviso-item[data-id="${a.id}"]`);
+  if (itemEl) itemEl.classList.add('seleccionado');
 }
 
-// ITEM RADIO
-function mkItemRadio(a) {
-  const estado = getEstadoAviso(a);
+function actualizarCentro(a) {
+  const cr = getCR(a);
+  const crEl = document.querySelector('.centro-cr');
+  if (crEl) crEl.textContent = cr;
+}
+
+// ITEM DE LISTA
+function mkItem(a, esRadio) {
+  const estado = getEstado(a);
   const item = document.createElement('div');
   item.dataset.id = String(a.id);
-  item.className = 'radio-item ' + estado;
-  const cr = getCuentaRegresiva(a);
-  const horClass = estado==='alerta'?'pronto':estado==='ahora'?'ya':'';
-  const horTexto = getHorarioTexto(a);
+  item.className = 'aviso-item' + (esRadio?' radio-item':'') + ' ' + estado;
+
+  const iconos = { urgente:'🔴', alerta:'⚠️', ahora:'📍', normal: esRadio?'🎙️':'📢' };
+  const cr = getCR(a);
+  const sub = getHorTexto(a);
+
   item.innerHTML = `
-    <span class="radio-item-marca">${a.marca||'Sin marca'}</span>
-    ${cr?`<span class="radio-item-cr">${cr}</span>`:''}
-    ${horTexto?`<span class="radio-item-hora ${horClass}">${horTexto}</span>`:''}
-    <span class="radio-item-arr">▶</span>`;
-  item.addEventListener('click', () => abrirModal(a));
+    <span class="item-icono">${iconos[estado]||'📢'}</span>
+    <div class="item-info">
+      <div class="item-marca">${a.marca||'Sin marca'}</div>
+      ${sub?`<div class="item-sub">${sub}</div>`:''}
+    </div>
+    ${cr?`<span class="item-cr">${cr}</span>`:''}`;
+
+  item.addEventListener('click', () => mostrarCentro(a));
   return item;
 }
 
-// MODAL
-function abrirModal(a) {
-  modalAvisoActivo = a;
-  const estado = getEstadoAviso(a);
-  const modal = document.getElementById('modal');
-  modal.className = 'modal ' + (estado !== 'normal' ? estado : '');
-  document.getElementById('modalMarca').textContent = a.marca || 'Sin marca';
-  document.getElementById('modalCopy').textContent = a.copy || 'Sin texto';
-  const horTexto = getHorarioTexto(a);
-  const horEl = document.getElementById('modalHora');
-  horEl.textContent = horTexto;
-  horEl.className = 'modal-hora' + (estado==='alerta'?' pronto':estado==='ahora'?' ya':'');
-  actualizarModal(a);
-  const tag = document.getElementById('modalTag');
-  tag.textContent = getTipoTag(a);
-  tag.className = 'tag tag-tipo';
-  document.getElementById('modalOverlay').classList.add('visible');
-}
-function actualizarModal(a) {
-  document.getElementById('modalCr').textContent = getCuentaRegresiva(a);
-}
-function cerrarModal() {
-  document.getElementById('modalOverlay').classList.remove('visible');
-  modalAvisoActivo = null;
-}
-document.getElementById('modalCerrar').addEventListener('click', cerrarModal);
-document.getElementById('modalBtnCerrar').addEventListener('click', cerrarModal);
-document.getElementById('modalOverlay').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('modalOverlay')) cerrarModal();
-});
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrarModal(); });
-
-// ACTUALIZAR ESTADOS
+// ACTUALIZAR ESTADOS CADA SEGUNDO
 function actualizarEstados() {
-  document.querySelectorAll('.aviso-card[data-id]').forEach(card => {
-    const a = avisos.find(x => String(x.id) === card.dataset.id);
+  document.querySelectorAll('.aviso-item[data-id]').forEach(item => {
+    const a = avisos.find(x => String(x.id)===item.dataset.id);
     if (!a) return;
-    const estado = getEstadoAviso(a);
-    card.className = 'aviso-card ' + estado;
-    const crEl = card.querySelector('.cuenta-regresiva');
-    if (crEl) crEl.textContent = getCuentaRegresiva(a);
-    ['tag-ahora','tag-alerta'].forEach(cls => { const t=card.querySelector('.'+cls); if(t) t.remove(); });
-    const top = card.querySelector('.aviso-top');
-    const horEl = card.querySelector('.aviso-horario');
-    if (estado==='ahora'&&!esUrgente(a)) { const t=document.createElement('span'); t.className='tag tag-ahora'; t.textContent='📍 Ahora'; top.insertBefore(t,horEl); }
-    if (estado==='alerta') { const t=document.createElement('span'); t.className='tag tag-alerta'; t.textContent='⚠️ Pronto'; top.insertBefore(t,horEl); }
-  });
-  document.querySelectorAll('.radio-item[data-id]').forEach(item => {
-    const a = avisos.find(x => String(x.id) === item.dataset.id);
-    if (!a) return;
-    const estado = getEstadoAviso(a);
-    item.className = 'radio-item ' + estado;
-    const crEl = item.querySelector('.radio-item-cr');
-    if (crEl) crEl.textContent = getCuentaRegresiva(a);
+    const estado = getEstado(a);
+    const esRadio = item.classList.contains('radio-item');
+    const seleccionado = item.classList.contains('seleccionado');
+    item.className = 'aviso-item' + (esRadio?' radio-item':'') + ' ' + estado + (seleccionado?' seleccionado':'');
+    const crEl = item.querySelector('.item-cr');
+    const cr = getCR(a);
+    if (crEl) crEl.textContent = cr;
+    else if (cr) { const s=document.createElement('span'); s.className='item-cr'; s.textContent=cr; item.appendChild(s); }
   });
 }
 
 // ORDENAR
-function ordenar(lista) {
-  return lista.sort((a,b) => {
+function ordenar(l) {
+  return l.sort((a,b) => {
     if (esUrgente(a)&&!esUrgente(b)) return -1;
     if (!esUrgente(a)&&esUrgente(b)) return 1;
-    return (horaEnMinutos(a.hora)??9999)-(horaEnMinutos(b.hora)??9999);
+    return (horaEnMin(a.hora)??9999)-(horaEnMin(b.hora)??9999);
   });
 }
 
 // RENDER
 function renderListas() {
   const prog = getProgramaActual();
-  const progNombre = prog ? prog.nombre : null;
-  const avisosPrograma = progNombre ? avisos.filter(a => a.programa === progNombre) : [];
-  const avisosRadio    = avisos.filter(a => a.programa === MENCIONES_RADIO_KEY);
+  const progNombre = prog?prog.nombre:null;
 
-  const lp = document.getElementById('listaPrograma');
-  lp.innerHTML = '';
-  if (avisosPrograma.length === 0) {
-    lp.innerHTML = `<div class="estado-vacio"><span>📭</span><p>${progNombre?'Sin avisos para este programa':'Sin programa activo ahora'}</p></div>`;
+  const avisosPrograma = progNombre ? avisos.filter(a=>a.programa===progNombre) : [];
+  const avisosRadio    = avisos.filter(a=>a.programa===MENCIONES_RADIO_KEY);
+
+  const lista = document.getElementById('listaAvisos');
+  lista.innerHTML = '';
+
+  if (avisosPrograma.length===0) {
+    lista.innerHTML = `<div class="estado-vacio-lista">${progNombre?'Sin avisos para este programa':'Sin programa activo ahora'}</div>`;
   } else {
-    ordenar([...avisosPrograma]).forEach(a => lp.appendChild(mkCardPrograma(a)));
+    ordenar([...avisosPrograma]).forEach(a => lista.appendChild(mkItem(a, false)));
   }
 
-  const lr = document.getElementById('listaRadio');
-  lr.innerHTML = '';
-  if (avisosRadio.length === 0) {
-    lr.innerHTML = `<div class="estado-vacio"><span>📭</span><p>Sin menciones radio</p></div>`;
-  } else {
-    ordenar([...avisosRadio]).forEach(a => lr.appendChild(mkItemRadio(a)));
+  // Menciones Radio al final
+  if (avisosRadio.length > 0) {
+    const sep = document.createElement('div');
+    sep.className = 'separador-radio';
+    sep.innerHTML = `🎙️ Menciones Radio <span class="seccion-badge">${avisosRadio.length}</span>`;
+    lista.appendChild(sep);
+    ordenar([...avisosRadio]).forEach(a => lista.appendChild(mkItem(a, true)));
   }
 
-  document.getElementById('badgePrograma').textContent = avisosPrograma.length;
-  document.getElementById('badgeRadio').textContent    = avisosRadio.length;
-  const total    = avisosPrograma.length + avisosRadio.length;
-  const urgentes = avisos.filter(a => esUrgente(a)).length;
-  const badge    = document.getElementById('contadorBadge');
+  document.getElementById('badgePrograma').textContent = avisosPrograma.length + avisosRadio.length;
+
+  const total = avisosPrograma.length + avisosRadio.length;
+  const urgentes = avisos.filter(a=>esUrgente(a)).length;
+  const badge = document.getElementById('contadorBadge');
   badge.textContent = total;
-  badge.className   = 'badge-count' + (urgentes > 0 ? ' urgente' : '');
+  badge.className = 'badge-count'+(urgentes>0?' urgente':'');
+
+  // Si había uno seleccionado, mantenerlo
+  if (avisoSeleccionado) {
+    const actualizado = avisos.find(x=>String(x.id)===String(avisoSeleccionado.id));
+    if (actualizado) mostrarCentro(actualizado);
+  }
+
   actualizarEstados();
 }
 
-// CARGAR AVISOS
+// CARGAR
 async function cargarAvisos() {
   try {
     const res = await fetch(API);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
+    if (!res.ok) throw new Error('HTTP '+res.status);
     const data = await res.json();
-    avisos = Array.isArray(data) ? data : (data.avisos || []);
-    if (!Array.isArray(data) && data.programas && data.programas.length > 0) PROGRAMAS = data.programas;
+    avisos = Array.isArray(data)?data:(data.avisos||[]);
+    if (!Array.isArray(data)&&data.programas&&data.programas.length>0) PROGRAMAS=data.programas;
     renderListas();
-    document.getElementById('footerDot').className = 'footer-dot';
-    document.getElementById('footerText').textContent = 'En línea · Radio Mila FM 88.7';
-    document.getElementById('footerUpdate').textContent = 'Actualizado: ' + new Date().toLocaleTimeString('es-CL');
+    document.getElementById('footerDot').className='footer-dot';
+    document.getElementById('footerText').textContent='En línea · Radio Mila FM 88.7';
+    document.getElementById('footerUpdate').textContent='Actualizado: '+new Date().toLocaleTimeString('es-CL');
   } catch(e) {
-    document.getElementById('footerDot').className = 'footer-dot sin-conexion';
-    document.getElementById('footerText').textContent = 'Sin conexión · ' + e.message;
-    ['listaPrograma','listaRadio'].forEach(id => {
-      document.getElementById(id).innerHTML = `<div class="estado-vacio"><span>⚠️</span><p>Error de conexión</p></div>`;
-    });
+    document.getElementById('footerDot').className='footer-dot sin-conexion';
+    document.getElementById('footerText').textContent='Sin conexión · '+e.message;
+    document.getElementById('listaAvisos').innerHTML=`<div class="estado-vacio-lista">⚠️ Error de conexión</div>`;
   }
 }
 
-// INICIO
 cargarAvisos();
 setInterval(cargarAvisos, 30000);
 cargarClima();
-setInterval(cargarClima, 600000); // actualiza clima cada 10 min
+setInterval(cargarClima, 600000);
 </script>
 </body>
 </html>
